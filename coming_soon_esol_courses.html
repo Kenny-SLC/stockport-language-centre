@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESOL Courses Coming Soon | Stockport Language Centre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2E75B6;
+            --accent: #1F4D7B;
+            --success: #27AE60;
+            --warning: #F39C12;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --border: #E0E0E0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: var(--warning);
+            color: var(--white);
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .intro-section h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .intro-section p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Course Tabs */
+        .tabs-container {
+            margin-bottom: 3rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-light);
+            border: 2px solid var(--border);
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn:hover {
+            background: var(--white);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Course Cards Grid */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+        }
+
+        .course-card:hover {
+            box-shadow: 0 8px 20px rgba(46, 117, 182, 0.2);
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .course-level {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .course-card h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .course-duration {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .course-duration::before {
+            content: '⏱';
+        }
+
+        .course-card p {
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+
+        .course-topics {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .course-topics h4 {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .topics-list {
+            list-style: none;
+        }
+
+        .topics-list li {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .topics-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .course-cta {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .course-cta:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 117, 182, 0.3);
+        }
+
+        /* Waitlist Section */
+        .waitlist-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .waitlist-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .waitlist-section p {
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .waitlist-form {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .waitlist-form button {
+            padding: 0.8rem 1.8rem;
+            background: var(--success);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .waitlist-form button:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .info-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        .footer-contact {
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-contact a {
+            color: var(--success);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .intro-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
+            }
+
+            .waitlist-form input,
+            .waitlist-form button {
+                width: 100%;
+            }
+        }
+
+        /* Animation */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .course-card {
+            animation: slideInUp 0.5s ease-out;
+        }
+
+        .course-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .course-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">🌍 Stockport Language Centre</div>
+        <h1>ESOL Courses</h1>
+        <p class="tagline">Practical English for Real Life</p>
+        <div class="coming-soon-badge">COMING SOON</div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Intro Section -->
+        <section class="intro-section">
+            <h2>Learn English. Build Your Future.</h2>
+            <p>We're launching a range of practical ESOL courses designed specifically for adults who want to improve their English for work, study, and daily life. Our courses focus on real-world skills that matter.</p>
+        </section>
+
+        <!-- Course Tabs -->
+        <section class="tabs-container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="showTab('entry-level')">Entry Level (A1)</button>
+                <button class="tab-btn" onclick="showTab('foundation')">Foundation (A2)</button>
+                <button class="tab-btn" onclick="showTab('intermediate')">Intermediate (B1)</button>
+                <button class="tab-btn" onclick="showTab('advanced')">Advanced (B2)</button>
+            </div>
+
+            <!-- Entry Level Courses -->
+            <div id="entry-level" class="tab-content">
+                <div class="course-grid">
+                    <!-- Entry Level 1 -->
+                    <div class="course-card">
+                        <span class="course-level">Entry Level 1 • A1</span>
+                        <h3>Introduction to English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Perfect for absolute beginners. Build confidence introducing yourself, basic daily communication, and understanding simple English.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Self-introduction & personal details</li>
+                                <li>Numbers, days, time</li>
+                                <li>Simple questions & answers</li>
+                                <li>Common phrases & greetings</li>
+                                <li>Basic written forms</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+
+                    <!-- Entry Level 2 -->
+                    <div class="course-card">
+                        <span class="course-level">Entry Level 2 • A1+</span>
+                        <h3>Essential English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Build on basics with practical vocabulary for shopping, directions, appointments, and everyday interactions.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Shopping & money</li>
+                                <li>Directions & locations</li>
+                                <li>Health & appointments</li>
+                                <li>Family & relationships</li>
+                                <li>Describing routines</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+
+                    <!-- Entry Level 3 -->
+                    <div class="course-card">
+                        <span class="course-level">Entry Level 3 • A2</span>
+                        <h3>Practical English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Move beyond basics. Handle real-world situations independently: work, housing, education, health.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Work & employment</li>
+                                <li>Housing & tenancy</li>
+                                <li>Education & learning</li>
+                                <li>Travel & transport</li>
+                                <li>Reading forms & documents</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foundation Courses -->
+            <div id="foundation" class="tab-content" style="display: none;">
+                <div class="course-grid">
+                    <!-- Foundation 1 -->
+                    <div class="course-card">
+                        <span class="course-level">Foundation 1 • A2</span>
+                        <h3>Everyday English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Communicate more confidently in familiar situations. Develop reading and writing skills for daily life.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Extended conversations</li>
+                                <li>Past & future tenses</li>
+                                <li>Descriptions & explanations</li>
+                                <li>Email & letter writing</li>
+                                <li>Job applications</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+
+                    <!-- Foundation 2 -->
+                    <div class="course-card">
+                        <span class="course-level">Foundation 2 • A2+</span>
+                        <h3>Workplace English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Prepare for employment. Learn professional communication, workplace vocabulary, and interview skills.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Job interviews</li>
+                                <li>Workplace communication</li>
+                                <li>Professional emails</li>
+                                <li>Health & safety</li>
+                                <li>CVs & applications</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+
+                    <!-- Foundation 3 -->
+                    <div class="course-card">
+                        <span class="course-level">Foundation 3 • B1</span>
+                        <h3>Advanced Everyday English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Express opinions, discuss ideas, and communicate confidently in a range of situations.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Expressing opinions</li>
+                                <li>Problem-solving discussions</li>
+                                <li>Story-telling & narratives</li>
+                                <li>News & current events</li>
+                                <li>Further study preparation</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intermediate Courses -->
+            <div id="intermediate" class="tab-content" style="display: none;">
+                <div class="course-grid">
+                    <!-- Intermediate 1 -->
+                    <div class="course-card">
+                        <span class="course-level">Intermediate 1 • B1</span>
+                        <h3>Independent English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Communicate independently on familiar topics. Develop confidence in speaking, reading, and writing.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Detailed conversations</li>
+                                <li>Expressing preferences & opinions</li>
+                                <li>Academic English basics</li>
+                                <li>Professional presentations</li>
+                                <li>Business correspondence</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+
+                    <!-- Intermediate 2 -->
+                    <div class="course-card">
+                        <span class="course-level">Intermediate 2 • B1+</span>
+                        <h3>Professional English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Develop professional competence. Master meetings, presentations, and business communication.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Business meetings</li>
+                                <li>Presentations & reports</li>
+                                <li>Negotiations</li>
+                                <li>Technical English</li>
+                                <li>Conference participation</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+
+                    <!-- Intermediate 3 -->
+                    <div class="course-card">
+                        <span class="course-level">Intermediate 3 • B2</span>
+                        <h3>Fluent English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Near-fluent communication. Understand complex ideas and express yourself confidently.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Advanced discussion</li>
+                                <li>Academic writing</li>
+                                <li>Critical analysis</li>
+                                <li>Cultural nuances</li>
+                                <li>Specialised vocabulary</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Courses -->
+            <div id="advanced" class="tab-content" style="display: none;">
+                <div class="course-grid">
+                    <!-- Advanced 1 -->
+                    <div class="course-card">
+                        <span class="course-level">Advanced 1 • B2</span>
+                        <h3>Mastering English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Upper-intermediate fluency. Understand subtle nuances and express complex ideas with ease.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Idiomatic expressions</li>
+                                <li>Abstract concepts</li>
+                                <li>Advanced writing</li>
+                                <li>Literature & culture</li>
+                                <li>Debate & persuasion</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+
+                    <!-- Advanced 2 -->
+                    <div class="course-card">
+                        <span class="course-level">Advanced 2 • C1</span>
+                        <h3>Expert English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Near-native proficiency. Master advanced professional and academic English.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Native-like fluency</li>
+                                <li>Sophisticated writing</li>
+                                <li>Research & analysis</li>
+                                <li>Teaching English basics</li>
+                                <li>International communication</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+
+                    <!-- Advanced 3 -->
+                    <div class="course-card">
+                        <span class="course-level">Advanced 3 • C2</span>
+                        <h3>Proficiency English</h3>
+                        <div class="course-duration">10 weeks • 2 sessions/week (90 mins)</div>
+                        <p>Mastery level. Understand everything you read and hear. Express yourself effortlessly.</p>
+                        <div class="course-topics">
+                            <h4>Topics Include:</h4>
+                            <ul class="topics-list">
+                                <li>Complete mastery</li>
+                                <li>Nuanced communication</li>
+                                <li>Literary English</li>
+                                <li>Linguistic precision</li>
+                                <li>Specialised fields</li>
+                            </ul>
+                        </div>
+                        <button class="course-cta">Join Waitlist</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Info Cards -->
+        <section class="info-cards">
+            <div class="info-card">
+                <h3>📚 What to Expect</h3>
+                <p>Engaging, task-based lessons with high student talk time. Real-world scenarios and practical skills.</p>
+            </div>
+            <div class="info-card">
+                <h3>💻 How It Works</h3>
+                <p>Online via Microsoft Teams. Flexible scheduling. 2 sessions per week + optional homework support.</p>
+            </div>
+            <div class="info-card">
+                <h3>🎯 Your Progress</h3>
+                <p>Regular assessments. Clear learning goals. Certificate of completion at each level.</p>
+            </div>
+        </section>
+
+        <!-- Waitlist Section -->
+        <section class="waitlist-section">
+            <h2>Be First to Know</h2>
+            <p>Join our waitlist to get notified the moment courses launch. Plus receive special early-bird pricing!</p>
+            <form class="waitlist-form" onsubmit="handleWaitlist(event)">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Notify Me</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Stockport Language Centre CIC. All rights reserved.</p>
+        <div class="footer-contact">
+            Questions? <a href="mailto:Kenneth.Moore@stockportlanguagecentre.org.uk">Get in touch</a> | 
+            <a href="tel:07737323009">07737 323 009</a>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.style.display = 'none');
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName).style.display = 'block';
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function handleWaitlist(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // In a real implementation, this would send the email to your server
+            alert(`Thanks for signing up! We'll notify ${email} when courses launch.`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

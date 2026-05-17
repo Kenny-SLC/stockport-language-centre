@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockport Language Centre | ESOL Excellence</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2E75B6;
+            --accent: #1F4D7B;
+            --success: #27AE60;
+            --danger: #E74C3C;
+            --text: #1a1a1a;
+            --light: #f8f9fa;
+            --border: #E0E0E0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            color: var(--text);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 4rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .hero .tagline {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .hero .subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--success);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .underline {
+            width: 60px;
+            height: 4px;
+            background: var(--success);
+            margin: 0.5rem auto 1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 12px 12px 0 0;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 12px 30px rgba(46, 117, 182, 0.15);
+            transform: translateY(-8px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Features List */
+        .features-section {
+            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .feature-icon {
+            min-width: 50px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .feature-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Levels Section */
+        .levels-section {
+            margin: 3rem 0;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .level-card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .level-card:hover {
+            border-color: var(--success);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.15);
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .level-card h3 {
+            color: var(--text);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .level-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Outcomes Section */
+        .outcomes-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        .outcomes-section h2 {
+            color: var(--white);
+            margin-bottom: 2rem;
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .outcome {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+        }
+
+        .outcome h4 {
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .outcome p {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        /* Why Us Section */
+        .why-us {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 3rem 0;
+        }
+
+        .why-us-content h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .why-us-list {
+            list-style: none;
+        }
+
+        .why-us-list li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .why-us-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .why-us-image {
+            background: linear-gradient(135deg, var(--light) 0%, var(--border) 100%);
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 4rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--success) 0%, #20934a 100%);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .badge-section {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .tagline { font-size: 1.1rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            .stats { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .why-us { grid-template-columns: 1fr; gap: 2rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .hero { padding: 2rem 1rem; }
+            main { padding: 2rem 1rem; }
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card, .level-card, .outcome {
+            animation: slideIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-placeholder">
+                <!-- Replace with your logo image: <img src="your-logo.png" style="width:100%; height:100%;"> -->
+                🌍
+            </div>
+            <h1>Stockport Language Centre</h1>
+            <p class="tagline">Practical ESOL Excellence for Real Life</p>
+            <p class="subtitle">Transforming lives through practical English. Trusted by learners and funders across Greater Manchester.</p>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">18</span>
+                    <span class="stat-label">Lessons Designed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Proficiency Levels</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">Weeks to Fluency</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- What We Do -->
+        <section>
+            <div class="section-header">
+                <h2>What We Deliver</h2>
+                <div class="underline"></div>
+                <p>Practical ESOL courses designed specifically for adults building real-world English skills in housing, employment, health, and digital literacy.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-icon">📚</span>
+                    <h3>Practical Curriculum</h3>
+                    <p>Real-world focus on housing, jobs, health, digital skills, and independence. Every lesson is immediately applicable.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">💻</span>
+                    <h3>Online Delivery</h3>
+                    <p>100% online via Microsoft Teams. Flexible, accessible, no transport barriers. 2 sessions per week, 90 minutes each.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">👥</span>
+                    <h3>Expert Tutoring</h3>
+                    <p>Qualified ESOL educators with culturally responsive teaching and high student talk time.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="why-us">
+            <div class="why-us-content">
+                <h2>Why Stockport Language Centre?</h2>
+                <ul class="why-us-list">
+                    <li>10-week rolling cohorts designed for busy adults</li>
+                    <li>Entry Level 1 (A1) through Advanced (B2+) courses</li>
+                    <li>High student talk time—everybody speaks</li>
+                    <li>Real-world assessment and practical skills</li>
+                    <li>Inclusive, respectful learning environment</li>
+                    <li>Data-driven outcomes tracking for funders</li>
+                    <li>Cost-effective model with measurable ROI</li>
+                </ul>
+            </div>
+            <div class="why-us-image">
+                📊 Proven Results
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="features-section">
+            <h2 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">Our Approach</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>Task-Based Learning</h4>
+                        <p>Learners solve real problems in English, building confidence through practical application.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>High STT Model</h4>
+                        <p>60%+ student talk time ensures learners practice speaking continuously.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>Culturally Responsive</h4>
+                        <p>Respectful, inclusive environment celebrating diverse backgrounds and cultures.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>Outcome Focused</h4>
+                        <p>Rigorous tracking of language progression, skills, and employment readiness.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>Flexible & Online</h4>
+                        <p>No transport barriers. Accessible for working adults and carers.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>Affordable</h4>
+                        <p>£499 per learner per 10-week cohort. Transparent pricing, maximum impact.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Levels -->
+        <section class="levels-section">
+            <div class="section-header">
+                <h2>Our Course Levels</h2>
+                <div class="underline"></div>
+                <p>From absolute beginners to advanced proficiency. Clear progression pathways.</p>
+            </div>
+
+            <div class="levels-grid">
+                <div class="level-card">
+                    <span class="level-badge">Entry Level 1</span>
+                    <h3>A1 Breakthrough</h3>
+                    <p>For absolute beginners. Build confidence introducing yourself and handling basic interactions.</p>
+                </div>
+                <div class="level-card">
+                    <span class="level-badge">Entry Level 2</span>
+                    <h3>A2 Waystage</h3>
+                    <p>Practical everyday English. Handle routine situations: shopping, appointments, directions.</p>
+                </div>
+                <div class="level-card">
+                    <span class="level-badge">Foundation</span>
+                    <h3>B1 Threshold</h3>
+                    <p>Communicate independently on familiar topics. Professional and employment-ready skills.</p>
+                </div>
+                <div class="level-card">
+                    <span class="level-badge">Advanced</span>
+                    <h3>B2+ Vantage</h3>
+                    <p>Near-fluent communication. Understand complex ideas and express yourself confidently.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Outcomes -->
+        <section class="outcomes-section">
+            <div class="section-header">
+                <h2>What Learners Achieve</h2>
+                <div class="underline" style="background: var(--success); margin: 0.5rem auto 1rem;"></div>
+            </div>
+
+            <div class="outcomes-grid">
+                <div class="outcome">
+                    <h4>Language Progression</h4>
+                    <p>Pre-A1 → A1 Secure. Measurable, assessed progression in 10 weeks.</p>
+                </div>
+                <div class="outcome">
+                    <h4>Employment Readiness</h4>
+                    <p>CV skills, job applications, interview confidence. Ready for work.</p>
+                </div>
+                <div class="outcome">
+                    <h4>Housing & Tenancy</h4>
+                    <p>Navigate agreements, submit requests, communicate with landlords independently.</p>
+                </div>
+                <div class="outcome">
+                    <h4>Digital Independence</h4>
+                    <p>Teams, email, online forms, job portals, online banking. Fully digital-ready.</p>
+                </div>
+                <div class="outcome">
+                    <h4>Confidence & Independence</h4>
+                    <p>Assertive communication. Navigate systems. Build social connections.</p>
+                </div>
+                <div class="outcome">
+                    <h4>Health & Wellness</h4>
+                    <p>Book appointments, understand prescriptions, access health services independently.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Funder Focus -->
+        <section class="cta-section">
+            <h2>For Funders & Partners</h2>
+            <p>Evidence-driven outcomes, cost-effective delivery, and measurable social impact.</p>
+            <div class="badge-section">
+                <div class="badge">✓ UK GDPR Compliant</div>
+                <div class="badge">✓ ICO Registered</div>
+                <div class="badge">✓ CIC Registered</div>
+                <div class="badge">✓ Rigorous Data Tracking</div>
+                <div class="badge">✓ Funder-Ready Reports</div>
+                <div class="badge">✓ Impact Measured</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Stockport Language Centre CIC. All rights reserved.</p>
+        <p>Registered with ICO | UK GDPR Compliant | Social Enterprise</p>
+    </footer>
+</body>
+</html>
