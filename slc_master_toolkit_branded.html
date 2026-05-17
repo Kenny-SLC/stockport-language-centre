@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLC Master Toolkit | Branded Tools Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1B5E8F;
+            --accent: #2A9E7F;
+            --success: #27AE60;
+            --light: #f8f9fa;
+            --border: #E0E0E0;
+            --text: #1a1a1a;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .navbar h1 {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary);
+        }
+
+        .hero h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .tool-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-body {
+            padding: 2rem;
+        }
+
+        .tool-body p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .features li {
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            position: relative;
+            color: #555;
+        }
+
+        .features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(27, 94, 143, 0.3);
+        }
+
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .quick-links {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .quick-links h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .link-btn {
+            padding: 1rem;
+            background: var(--light);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .link-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <div class="logo">
+                <img src="slc_logo.png" alt="Stockport Language Centre Logo">
+            </div>
+            <div>
+                <h1>Stockport Language Centre</h1>
+                <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Practical ESOL Excellence</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <h2>🎓 SLC Master Toolkit</h2>
+            <p>Professional tools for lesson creation, outcome tracking, partner engagement, and impact reporting</p>
+            <p style="font-size: 1rem; color: var(--primary); font-weight: 600;">Complete system for delivering excellence at scale</p>
+        </div>
+
+        <div class="quick-links">
+            <h3>📱 Quick Access to All Tools</h3>
+            <div class="links-grid">
+                <a href="lesson-studio.html" class="link-btn">🎓 Lesson Studio</a>
+                <a href="slc_learner_outcomes_dashboard.html" class="link-btn">📊 Outcomes Dashboard</a>
+                <a href="slc_partner_satisfaction_survey.html" class="link-btn">📋 Partner Survey</a>
+                <a href="slc_impact_report_generator.html" class="link-btn">💼 Impact Reports</a>
+                <a href="slc_lesson_planner_standalone.html" class="link-btn">📝 Lesson Planner</a>
+                <a href="coming_soon_esol_courses.html" class="link-btn">📚 Course Outlines</a>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem; font-size: 1.8rem;">Your Complete Toolkit</h2>
+
+        <div class="tools-grid">
+            <!-- Lesson Studio -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">🎓</div>
+                    <h3>Lesson Studio</h3>
+                    <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Cloud-based course creation</p>
+                </div>
+                <div class="tool-body">
+                    <p>Create professional 90-minute ESOL lessons in seconds. 6 ready-to-use templates with UC Journey integration. Perfect for live demos with funders.</p>
+                    <ul class="features">
+                        <li>Templates: Housing, UC Portal, Jobs, Health, Teams, Money</li>
+                        <li>Auto-generates lesson plans with activities & grouping</li>
+                        <li>UC outcomes integration</li>
+                        <li>Export to Word instantly</li>
+                    </ul>
+                    <button class="btn" onclick="window.open('lesson-studio.html', '_blank')">Open Lesson Studio →</button>
+                </div>
+            </div>
+
+            <!-- Outcomes Dashboard -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">📊</div>
+                    <h3>Outcomes Dashboard</h3>
+                    <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Real-time progress tracking</p>
+                </div>
+                <div class="tool-body">
+                    <p>Track every learner's CEFR progression, attendance, and UC outcomes in real-time. Visual charts and detailed learner profiles.</p>
+                    <ul class="features">
+                        <li>CEFR level progression charts</li>
+                        <li>Individual learner tracking</li>
+                        <li>UC outcomes achievement rates</li>
+                        <li>Export reports (PDF, Excel)</li>
+                    </ul>
+                    <button class="btn" onclick="window.open('slc_learner_outcomes_dashboard.html', '_blank')">Open Dashboard →</button>
+                </div>
+            </div>
+
+            <!-- Partner Survey -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">📋</div>
+                    <h3>Partner Satisfaction</h3>
+                    <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Structured feedback collection</p>
+                </div>
+                <div class="tool-body">
+                    <p>Comprehensive survey to gather partner feedback on course quality, tutor performance, and outcomes. Professional form with export options.</p>
+                    <ul class="features">
+                        <li>10 rating questions (1-5 scale)</li>
+                        <li>Open-ended feedback sections</li>
+                        <li>Stockport Homes specific outcomes</li>
+                        <li>Download as Word document</li>
+                    </ul>
+                    <button class="btn" onclick="window.open('slc_partner_satisfaction_survey.html', '_blank')">Open Survey →</button>
+                </div>
+            </div>
+
+            <!-- Impact Reports -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">💼</div>
+                    <h3>Impact Report Generator</h3>
+                    <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Funder-ready reporting</p>
+                </div>
+                <div class="tool-body">
+                    <p>Generate professional impact reports in 2 minutes. Fill in outcomes data, get a complete funder-ready report. Export to Word.</p>
+                    <ul class="features">
+                        <li>Executive summary + key metrics</li>
+                        <li>Learning outcomes breakdown</li>
+                        <li>Stockport Homes specific data</li>
+                        <li>Cost-effectiveness analysis</li>
+                    </ul>
+                    <button class="btn" onclick="window.open('slc_impact_report_generator.html', '_blank')">Open Report Generator →</button>
+                </div>
+            </div>
+
+            <!-- Lesson Planner -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">📝</div>
+                    <h3>Lesson Planner</h3>
+                    <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">Detailed lesson planning</p>
+                </div>
+                <div class="tool-body">
+                    <p>Standalone lesson planner for creating custom lessons. Full 90-minute structure with pair/trio/group work instructions.</p>
+                    <ul class="features">
+                        <li>90-min lesson structure template</li>
+                        <li>Grouping instructions for 12 learners</li>
+                        <li>Screen-sharing guidance</li>
+                        <li>Speech practice tool suggestions</li>
+                    </ul>
+                    <button class="btn" onclick="window.open('slc_lesson_planner_standalone.html', '_blank')">Open Lesson Planner →</button>
+                </div>
+            </div>
+
+            <!-- Course Outlines -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">📚</div>
+                    <h3>Course Outlines</h3>
+                    <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">12 course overview</p>
+                </div>
+                <div class="tool-body">
+                    <p>Coming Soon page displaying 12 ESOL courses across 4 proficiency levels. Perfect for waitlist capture and course showcase.</p>
+                    <ul class="features">
+                        <li>Entry Level (A1) - 3 courses</li>
+                        <li>Foundation (A2) - 3 courses</li>
+                        <li>Intermediate (B1) - 3 courses</li>
+                        <li>Advanced (B2+) - 3 courses</li>
+                    </ul>
+                    <button class="btn" onclick="window.open('coming_soon_esol_courses.html', '_blank')">View Courses →</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: white; border-radius: 12px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid var(--accent);">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">🚀 How to Use These Tools</h3>
+            <p><strong>For Stockport Homes Meeting:</strong></p>
+            <ol style="margin-left: 1.5rem; color: #555; line-height: 2;">
+                <li><strong>Open Lesson Studio</strong> → Click Housing template → Watch lesson generate in 2 seconds</li>
+                <li><strong>Show Outcomes Dashboard</strong> → Real-time learner progress with charts and metrics</li>
+                <li><strong>Show Partner Survey</strong> → Demonstrate commitment to feedback & quality</li>
+                <li><strong>Show Impact Report Generator</strong> → Generate sample report showing cost-effectiveness</li>
+            </ol>
+            <p style="margin-top: 1.5rem; color: var(--primary); font-weight: 600;">This demonstrates professionalism, scalability, and accountability—everything funders want to see.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <img src="slc_logo.png" alt="SLC Logo">
+        <h3>Stockport Language Centre CIC</h3>
+        <p>Practical ESOL Excellence for Real Life</p>
+        <p style="margin-top: 1rem; opacity: 0.9; font-size: 0.85rem;">Master Toolkit • Professional Tools for Professional Results</p>
+        <p style="margin-top: 1.5rem; opacity: 0.7; font-size: 0.8rem;">© 2025 Stockport Language Centre CIC. All rights reserved.</p>
+    </div>
+</body>
+</html>

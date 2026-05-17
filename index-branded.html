@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockport Language Centre | ESOL Excellence</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1B5E8F;
+            --accent: #2A9E7F;
+            --success: #27AE60;
+            --text: #1a1a1a;
+            --light: #f8f9fa;
+            --border: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            color: var(--text);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            margin: 0 auto;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .hero .tagline {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .hero .subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #FFD700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .underline {
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 0.5rem auto 1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 12px 12px 0 0;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 12px 30px rgba(27, 94, 143, 0.15);
+            transform: translateY(-8px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: linear-gradient(135deg, var(--light) 0%, white 100%);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .feature-icon {
+            min-width: 50px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .feature-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--success) 0%, #20934a 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .badge-section {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        footer img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .tagline { font-size: 1.1rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="slc_logo.png" alt="Stockport Language Centre">
+                </div>
+            </div>
+            <h1>Stockport Language Centre</h1>
+            <p class="tagline">Practical ESOL Excellence for Real Life</p>
+            <p class="subtitle">Transforming lives through practical English. Trusted by learners and funders across Greater Manchester.</p>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">Week Cohorts</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Learners Per Group</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">CEFR Levels</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- What We Do -->
+        <section>
+            <div class="section-header">
+                <h2>What We Deliver</h2>
+                <div class="underline"></div>
+                <p>Practical ESOL courses designed specifically for adults building real-world English skills in housing, employment, health, and digital literacy.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-icon">📚</span>
+                    <h3>Practical Curriculum</h3>
+                    <p>Real-world focus on housing, jobs, health, digital skills, and independence. Every lesson is immediately applicable.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">💻</span>
+                    <h3>Online Delivery</h3>
+                    <p>100% online via Microsoft Teams. Flexible, accessible, no transport barriers. 2 sessions per week, 90 minutes each.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">👥</span>
+                    <h3>Expert Tutoring</h3>
+                    <p>Qualified ESOL educators with culturally responsive teaching and high student talk time.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin: 3rem 0;">
+            <div>
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 2rem;">Why Stockport Language Centre?</h2>
+                <div style="list-style: none;">
+                    <div style="padding: 0.8rem 0 0.8rem 2.5rem; position: relative; color: #555; font-size: 1rem;">
+                        <span style="position: absolute; left: 0; color: var(--success); font-weight: bold; font-size: 1.3rem;">✓</span>
+                        10-week rolling cohorts designed for busy adults
+                    </div>
+                    <div style="padding: 0.8rem 0 0.8rem 2.5rem; position: relative; color: #555; font-size: 1rem;">
+                        <span style="position: absolute; left: 0; color: var(--success); font-weight: bold; font-size: 1.3rem;">✓</span>
+                        Entry Level 1 (A1) through Advanced (B2+) courses
+                    </div>
+                    <div style="padding: 0.8rem 0 0.8rem 2.5rem; position: relative; color: #555; font-size: 1rem;">
+                        <span style="position: absolute; left: 0; color: var(--success); font-weight: bold; font-size: 1.3rem;">✓</span>
+                        High student talk time—everybody speaks
+                    </div>
+                    <div style="padding: 0.8rem 0 0.8rem 2.5rem; position: relative; color: #555; font-size: 1rem;">
+                        <span style="position: absolute; left: 0; color: var(--success); font-weight: bold; font-size: 1.3rem;">✓</span>
+                        Real-world assessment and practical skills
+                    </div>
+                    <div style="padding: 0.8rem 0 0.8rem 2.5rem; position: relative; color: #555; font-size: 1rem;">
+                        <span style="position: absolute; left: 0; color: var(--success); font-weight: bold; font-size: 1.3rem;">✓</span>
+                        Inclusive, respectful learning environment
+                    </div>
+                    <div style="padding: 0.8rem 0 0.8rem 2.5rem; position: relative; color: #555; font-size: 1rem;">
+                        <span style="position: absolute; left: 0; color: var(--success); font-weight: bold; font-size: 1.3rem;">✓</span>
+                        Data-driven outcomes tracking for funders
+                    </div>
+                </div>
+            </div>
+            <div style="background: linear-gradient(135deg, var(--light) 0%, var(--border) 100%); padding: 3rem; border-radius: 12px; text-align: center; font-size: 4rem;">
+                📊 Proven Results
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features-section">
+            <h2 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">Our Approach</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>Task-Based Learning</h4>
+                        <p>Learners solve real problems in English, building confidence through practical application.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>High STT Model</h4>
+                        <p>60%+ student talk time ensures learners practice speaking continuously.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>Culturally Responsive</h4>
+                        <p>Respectful, inclusive environment celebrating diverse backgrounds and cultures.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>Outcome Focused</h4>
+                        <p>Rigorous tracking of language progression, skills, and employment readiness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2>Ready to Start?</h2>
+            <p>Join our next cohort and transform your English in just 10 weeks.</p>
+            <div class="badge-section">
+                <div class="badge">✓ UK GDPR Compliant</div>
+                <div class="badge">✓ ICO Registered</div>
+                <div class="badge">✓ CIC Registered</div>
+                <div class="badge">✓ Outcomes Tracked</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <img src="slc_logo.png" alt="Stockport Language Centre">
+        <h3>Stockport Language Centre CIC</h3>
+        <p>Practical ESOL Excellence for Real Life</p>
+        <p style="margin-top: 1rem; opacity: 0.8; font-size: 0.85rem;">© 2025 Stockport Language Centre CIC. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.8rem;">Registered with ICO | UK GDPR Compliant | Social Enterprise</p>
+    </footer>
+</body>
+</html>
