@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLC Lesson Studio | Cloud-Based Course Creation Platform</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2E75B6;
+            --accent: #1F4D7B;
+            --success: #27AE60;
+            --warning: #F39C12;
+            --danger: #E74C3C;
+            --light: #f8f9fa;
+            --border: #E0E0E0;
+            --text: #1a1a1a;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .navbar-status {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 24px rgba(46, 117, 182, 0.2);
+        }
+
+        .hero-banner h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-banner p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        /* Quick Templates */
+        .quick-templates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .template-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .template-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(46, 117, 182, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .template-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .template-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .template-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .template-tag {
+            display: inline-block;
+            background: var(--light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        /* Main Content */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-panel h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            border-bottom: 3px solid var(--success);
+            padding-bottom: 0.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-primary {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+        }
+
+        .btn-ghost {
+            background: var(--light);
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            background: white;
+            border-color: var(--primary);
+        }
+
+        /* Output Panel */
+        .output-panel {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            max-height: 1200px;
+            overflow-y: auto;
+        }
+
+        .lesson-header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .lesson-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .lesson-meta {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .meta-item {
+            background: var(--light);
+            padding: 0.8rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--success);
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.7rem;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .meta-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 0.3rem;
+        }
+
+        .lesson-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .activity-box {
+            background: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .activity-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-time {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .grouping-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.8rem;
+        }
+
+        .pair-work { background: #3498DB; }
+        .trio-work { background: #9B59B6; }
+        .group-work { background: #E74C3C; }
+        .whole-class { background: var(--success); }
+
+        .uc-box {
+            background: linear-gradient(90deg, #FFF8E6 0%, #FFFDE7 100%);
+            border-left: 4px solid var(--warning);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .uc-label {
+            font-weight: 700;
+            color: var(--warning);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-note {
+            background: linear-gradient(90deg, #EBF5FB 0%, #E3F2FD 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .no-content {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+        }
+
+        .export-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+        }
+
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-panel {
+                position: relative;
+                top: auto;
+            }
+            .lesson-meta {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media print {
+            .sidebar-panel, .export-buttons, .navbar { display: none; }
+            .output-panel { box-shadow: none; border: none; }
+        }
+
+        .stockport-homes-badge {
+            background: linear-gradient(90deg, #2E75B6 0%, #27AE60 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stockport-homes-badge h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid var(--light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-brand">
+            🎓 SLC Lesson Studio
+        </div>
+        <div class="navbar-status">
+            <div class="status-badge">📊 Cloud-Based</div>
+            <div class="status-badge">✓ Live Demo Ready</div>
+            <div class="status-badge">🚀 Stockport Homes</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stockport Homes Hero -->
+        <div class="stockport-homes-badge">
+            <h3>✨ Stockport Homes Partnership Demo</h3>
+            <p>Real-time lesson creation showing learner outcomes for Stockport Housing tenants</p>
+        </div>
+
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+            <h1>Lesson Studio - Professional Course Creation</h1>
+            <p>Create complete, research-backed ESOL lessons in seconds. Perfect for funder demos.</p>
+        </div>
+
+        <!-- Quick Templates -->
+        <div>
+            <h2 style="margin-bottom: 1rem; color: var(--text);">📚 Ready-to-Use Templates (Click to Load)</h2>
+            <div class="quick-templates">
+                <div class="template-card" onclick="loadTemplate('housing')">
+                    <div class="template-icon">🏠</div>
+                    <h3>Housing & Tenancy</h3>
+                    <p>Tenant rights, lease agreements, landlord communication</p>
+                    <span class="template-tag">Week 2</span>
+                    <span class="template-tag">A1</span>
+                </div>
+
+                <div class="template-card" onclick="loadTemplate('ucportal')">
+                    <div class="template-icon">💻</div>
+                    <h3>UC Portal Navigation</h3>
+                    <p>My Account, messages, journal, commitments</p>
+                    <span class="template-tag">Week 3</span>
+                    <span class="template-tag">A1</span>
+                </div>
+
+                <div class="template-card" onclick="loadTemplate('jobs')">
+                    <div class="template-icon">💼</div>
+                    <h3>Job Search & CVs</h3>
+                    <p>Cover letters, applications, interview preparation</p>
+                    <span class="template-tag">Week 5</span>
+                    <span class="template-tag">A2</span>
+                </div>
+
+                <div class="template-card" onclick="loadTemplate('health')">
+                    <div class="template-icon">🏥</div>
+                    <h3>Health & Appointments</h3>
+                    <p>Doctor's office, symptoms, NHS services</p>
+                    <span class="template-tag">Week 4</span>
+                    <span class="template-tag">A1</span>
+                </div>
+
+                <div class="template-card" onclick="loadTemplate('teams')">
+                    <div class="template-icon">📱</div>
+                    <h3>Digital Skills (Teams)</h3>
+                    <p>Camera, mic, chat, breakout rooms</p>
+                    <span class="template-tag">Week 1</span>
+                    <span class="template-tag">Pre-A1</span>
+                </div>
+
+                <div class="template-card" onclick="loadTemplate('money')">
+                    <div class="template-icon">💰</div>
+                    <h3>Money & Budgeting</h3>
+                    <p>Bills, budget planning, financial independence</p>
+                    <span class="template-tag">Week 8</span>
+                    <span class="template-tag">A2</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Sidebar -->
+            <div class="sidebar-panel">
+                <h2>⚙️ Customize</h2>
+                <form id="lessonForm">
+                    <div class="form-group">
+                        <label>Topic</label>
+                        <input type="text" id="topic" placeholder="e.g., Housing Rights" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>CEFR Level</label>
+                        <select id="level" required>
+                            <option value="">Select...</option>
+                            <option value="Pre-A1">Pre-A1 (Breakthrough)</option>
+                            <option value="A1">A1 (Breakthrough Secure)</option>
+                            <option value="A2">A2 (Waystage)</option>
+                            <option value="B1">B1 (Threshold)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Week (1-10)</label>
+                        <input type="number" id="week" min="1" max="10" placeholder="e.g., 2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>UC Journey Focus</label>
+                        <select id="ucFocus" required>
+                            <option value="">Select...</option>
+                            <option value="Housing">Housing & Tenancy</option>
+                            <option value="UC Portal">UC Portal Navigation</option>
+                            <option value="UC Commitments">UC Commitments</option>
+                            <option value="Job Search">Job Search</option>
+                            <option value="Health">Health & Appointments</option>
+                            <option value="Digital Skills">Digital Skills</option>
+                            <option value="Confidence">Confidence & Independence</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Key Vocabulary (comma-separated)</label>
+                        <textarea id="vocabulary" placeholder="landlord, tenant, lease..." required></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="generateLesson()">
+                        🚀 Generate Lesson
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="exportWord()">
+                        📄 Export as Word
+                    </button>
+                    <button type="button" class="btn btn-ghost" onclick="printLesson()">
+                        🖨️ Print
+                    </button>
+                </form>
+            </div>
+
+            <!-- Output -->
+            <div class="output-panel">
+                <div id="lessonOutput">
+                    <div class="no-content">
+                        <h3>👈 Click a template or fill the form to generate</h3>
+                        <p>Complete 90-minute lesson with activities, grouping instructions, and UC Journey integration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const templates = {
+            housing: {
+                topic: 'Housing & Tenancy Rights',
+                level: 'A1',
+                week: 2,
+                ucFocus: 'Housing',
+                vocabulary: 'landlord, tenant, lease, deposit, rent, utilities, maintenance, notice, agreement, property manager'
+            },
+            ucportal: {
+                topic: 'Using the UC Portal - My Account',
+                level: 'A1',
+                week: 3,
+                ucFocus: 'UC Portal',
+                vocabulary: 'portal, account, username, password, messages, journal, commitments, upload, submit, deadline'
+            },
+            jobs: {
+                topic: 'Job Search - Writing a Cover Letter',
+                level: 'A2',
+                week: 5,
+                ucFocus: 'Job Search',
+                vocabulary: 'cover letter, application, vacancy, position, experience, qualifications, skills, salary, full-time, part-time'
+            },
+            health: {
+                topic: 'Health - Booking a Doctor\'s Appointment',
+                level: 'A1',
+                week: 4,
+                ucFocus: 'Health',
+                vocabulary: 'appointment, symptom, pain, fever, headache, cough, prescription, GP, receptionist, available'
+            },
+            teams: {
+                topic: 'Getting Started with Microsoft Teams',
+                level: 'Pre-A1',
+                week: 1,
+                ucFocus: 'Digital Skills',
+                vocabulary: 'camera, microphone, mute, unmute, chat, message, breakout room, screen share, audio, video'
+            },
+            money: {
+                topic: 'Talking About Money - Bills and Budgeting',
+                level: 'A2',
+                week: 8,
+                ucFocus: 'Confidence',
+                vocabulary: 'pounds, pence, bill, rent, electricity, water, gas, budget, cost, expensive, cheap, save, spend'
+            }
+        };
+
+        function loadTemplate(templateName) {
+            const template = templates[templateName];
+            document.getElementById('topic').value = template.topic;
+            document.getElementById('level').value = template.level;
+            document.getElementById('week').value = template.week;
+            document.getElementById('ucFocus').value = template.ucFocus;
+            document.getElementById('vocabulary').value = template.vocabulary;
+            
+            // Auto-generate
+            setTimeout(() => generateLesson(), 300);
+        }
+
+        function generateLesson() {
+            const topic = document.getElementById('topic').value;
+            const level = document.getElementById('level').value;
+            const week = document.getElementById('week').value;
+            const ucFocus = document.getElementById('ucFocus').value;
+            const vocabulary = document.getElementById('vocabulary').value;
+
+            if (!topic || !level || !week || !ucFocus || !vocabulary) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const vocabList = vocabulary.split(',').map(v => v.trim());
+            const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+            let html = `
+                <div class="lesson-header">
+                    <div class="lesson-title">${topic}</div>
+                    <div class="lesson-meta">
+                        <div class="meta-item">
+                            <div class="meta-label">Level</div>
+                            <div class="meta-value">${level}</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Week</div>
+                            <div class="meta-value">Week ${week}/10</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Duration</div>
+                            <div class="meta-value">90 mins</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Group Size</div>
+                            <div class="meta-value">12 learners</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Format</div>
+                            <div class="meta-value">Teams Online</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-section">
+                    <div class="section-header">🎯 Learning Outcomes</div>
+                    <div style="background: #E8F5E9; border-left: 4px solid #27AE60; padding: 1.2rem; border-radius: 4px;">
+                        <strong>By the end of this lesson, learners will be able to:</strong><br><br>
+                        <div style="margin-bottom: 0.5rem;">✓ Understand and use ${vocabList.slice(0, 3).join(', ')} in context</div>
+                        <div style="margin-bottom: 0.5rem;">✓ Participate in pair, trio and group discussions</div>
+                        <div style="margin-bottom: 0.5rem;">✓ Connect learning to ${ucFocus} journey</div>
+                        <div>✓ Demonstrate increasing confidence and independence</div>
+                    </div>
+                </div>
+
+                <div class="lesson-section">
+                    <div class="section-header">🔗 UC Journey Connection</div>
+                    <div class="uc-box">
+                        <div class="uc-label">Universal Credit Context</div>
+                        <p><strong>${ucFocus}</strong></p>
+                        <p style="margin-top: 0.8rem; font-size: 0.95rem;">This lesson connects to real-world situations Stockport Homes tenants face, building practical independence and reducing barriers to employment and housing stability.</p>
+                    </div>
+                </div>
+
+                <div class="lesson-section">
+                    <div class="section-header">📝 Vocabulary & Activities</div>
+                    <p style="margin-bottom: 1rem;"><strong>Key Terms:</strong> ${vocabList.join(' • ')}</p>
+                    ${vocabList.slice(0, 5).map(vocab => `
+                        <div class="activity-box">
+                            <div class="activity-title">${vocab}</div>
+                            <div style="color: #666; font-size: 0.9rem;">Presented with visual aids, pronunciation guidance, and contextual examples</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="lesson-section">
+                    <div class="section-header">⏱️ 90-Minute Lesson Structure</div>
+                    
+                    <div class="activity-box">
+                        <div class="activity-title">1. Warm-up & Ice-breaker</div>
+                        <div class="activity-time">⏱️ 10 minutes</div>
+                        <div class="grouping-badge whole-class">Whole Class</div>
+                        <p>Greeting activity using screen-shared visuals. Brief chat about previous week. Build positive learning culture.</p>
+                        <div class="visual-note"><strong>📊 Visual tip:</strong> Share slide with week's topic headline and greeting phrases</div>
+                    </div>
+
+                    <div class="activity-box">
+                        <div class="activity-title">2. Vocabulary Introduction</div>
+                        <div class="activity-time">⏱️ 15 minutes</div>
+                        <div class="grouping-badge whole-class">Whole Class</div>
+                        <p>Present key vocabulary with images, definitions, example sentences, pronunciation. Use screen sharing for visual impact.</p>
+                    </div>
+
+                    <div class="activity-box">
+                        <div class="activity-title">3. Vocabulary Practice</div>
+                        <div class="activity-time">⏱️ 15 minutes</div>
+                        <div class="grouping-badge pair-work">Pair Work (6 pairs)</div>
+                        <p>Learners in Teams breakout rooms. Match vocabulary to definitions. Practice saying words aloud. High student talk time.</p>
+                        <div class="visual-note"><strong>🎤 Speech Practice:</strong> Use Windows Narrator, Vocaroo app, or Teams recording for pronunciation feedback</div>
+                    </div>
+
+                    <div class="activity-box">
+                        <div class="activity-title">4. Language Point / Grammar</div>
+                        <div class="activity-time">⏱️ 15 minutes</div>
+                        <div class="grouping-badge trio-work">Trio Work (4 trios)</div>
+                        <p>Tutor explains grammar/language structure with color-coded examples. Each trio explains one example to the class. Interactive learning.</p>
+                    </div>
+
+                    <div class="activity-box">
+                        <div class="activity-title">5. Main Activity - Group Work</div>
+                        <div class="activity-time">⏱️ 20 minutes</div>
+                        <div class="grouping-badge group-work">Group Work (4 groups of 3)</div>
+                        <p>Divide into 4 breakout rooms. Scenario-based task using vocabulary in context. High student talk time (each learner speaks 3-4+ mins). Focus on fluency and confidence.</p>
+                        <div class="visual-note"><strong>🎤 Speech Practice:</strong> Groups can record themselves using Teams recording feature or Vocaroo app for self-assessment</div>
+                    </div>
+
+                    <div class="activity-box">
+                        <div class="activity-title">6. Class Feedback & Sharing</div>
+                        <div class="activity-time">⏱️ 10 minutes</div>
+                        <div class="grouping-badge whole-class">Whole Class</div>
+                        <p>Each group shares key sentences/findings. Celebrate effort. Gently correct language errors. Build confidence.</p>
+                    </div>
+
+                    <div class="activity-box">
+                        <div class="activity-title">7. Exit Ticket / Quick Assessment</div>
+                        <div class="activity-time">⏱️ 5 minutes</div>
+                        <div class="grouping-badge">Individual</div>
+                        <p>Each learner says one word/sentence using key vocabulary, or quick poll. Assessment of understanding.</p>
+                    </div>
+                </div>
+
+                <div class="lesson-section">
+                    <div class="section-header">📊 Stockport Homes Outcomes Tracking</div>
+                    <div style="background: #E3F2FD; border-left: 4px solid #2E75B6; padding: 1.2rem; border-radius: 4px;">
+                        <p><strong>This lesson contributes to:</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.8rem;">
+                            <li>✓ Language progression (Pre-A1 → A1 Secure over 10 weeks)</li>
+                            <li>✓ Digital independence (Teams, screen sharing, online learning)</li>
+                            <li>✓ Practical skills (${ucFocus} context)</li>
+                            <li>✓ Employment readiness (communication, confidence, teamwork)</li>
+                            <li>✓ Housing stability (understanding rights and responsibilities)</li>
+                            <li>✓ UC journey navigation (reduced barriers to benefits)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lesson-section">
+                    <div class="section-header">💡 Resources Needed</div>
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Microsoft Teams:</strong> Breakout rooms for pair/trio/group work</li>
+                        <li><strong>Screen Sharing:</strong> PowerPoint, Canva, or Google Slides with visuals</li>
+                        <li><strong>Visuals:</strong> Infographics, flashcards, photos, videos</li>
+                        <li><strong>Speech Tools:</strong> Windows Narrator, Vocaroo, Speeko app, Teams recording</li>
+                        <li><strong>Chat & Whiteboard:</strong> For Q&A and collaborative work</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--border); text-align: center; color: #888; font-size: 0.85rem;">
+                    <p>Generated: ${today} | Stockport Language Centre CIC | Lesson Studio v1.0</p>
+                    <p style="margin-top: 0.5rem;"><strong>For Stockport Homes Partnership</strong> | Demonstrates learner outcomes and professional delivery</p>
+                </div>
+
+                <div class="export-buttons">
+                    <button class="btn btn-secondary" onclick="exportWord()">📄 Export as Word</button>
+                    <button class="btn btn-secondary" onclick="printLesson()">🖨️ Print for Review</button>
+                </div>
+            `;
+
+            document.getElementById('lessonOutput').innerHTML = html;
+        }
+
+        function exportWord() {
+            const content = document.getElementById('lessonOutput').innerHTML;
+            if (!content.includes('lesson-header')) {
+                alert('Generate a lesson first');
+                return;
+            }
+            
+            const html = `<html><head><meta charset="UTF-8"><style>
+                body { font-family: Calibri; margin: 1in; }
+                h1 { color: #2E75B6; }
+                .section-header { background: #2E75B6; color: white; padding: 10px; margin-top: 20px; }
+                .activity-box { border-left: 4px solid #2E75B6; padding: 10px; margin: 10px 0; background: #f5f5f5; }
+            </style></head><body>${content}</body></html>`;
+            
+            const blob = new Blob([html], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `SLC_Lesson_${new Date().toISOString().split('T')[0]}.doc`;
+            link.click();
+        }
+
+        function printLesson() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
