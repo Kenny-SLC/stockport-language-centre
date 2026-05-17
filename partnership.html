@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockport Homes ESOL Partnership | Stockport Language Centre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2E75B6;
+            --primary-light: #E8F0F7;
+            --accent: #1F4D7B;
+            --success: #27AE60;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --border-light: #E0E0E0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "▪";
+            font-size: 2rem;
+            color: var(--success);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--success);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: transparent;
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.8rem;
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--primary-light);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(46, 117, 182, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Features */
+        .features {
+            background: var(--white);
+            border: 2px solid var(--border-light);
+            border-radius: 6px;
+            padding: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .feature-icon {
+            min-width: 3rem;
+            width: 3rem;
+            height: 3rem;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .feature-content h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-content p {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+            border-left: 5px solid var(--primary);
+            padding: 2rem;
+            border-radius: 4px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlight-box li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .highlight-box li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Outcomes section */
+        .outcome-item {
+            background: var(--white);
+            border: 2px solid var(--border-light);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .outcome-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .outcome-item p {
+            color: var(--text-light);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Contact section */
+        .contact-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .contact-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: slideIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Stockport Language Centre</div>
+            <h1>ESOL Partnership with Stockport Homes</h1>
+            <p class="tagline">Practical English for Housing, Employment & Independent Living</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">About This Partnership</h2>
+            <div class="grid-2">
+                <div>
+                    <p>We're proposing a strategic pilot partnership with Stockport Homes to deliver targeted ESOL provision for Stockport Homes tenants. Our programme focuses on practical English for navigating housing, Universal Credit, job hunting, NHS services, and digital literacy.</p>
+                    <p style="margin-top: 1rem;">This is a genuine pilot—we're co-designing with Stockport Homes, gathering rigorous outcome data, and building a model that works for your tenants.</p>
+                </div>
+                <div class="highlight-box">
+                    <h3>Quick Facts</h3>
+                    <ul>
+                        <li>10-week rolling cohorts (10–12 learners)</li>
+                        <li>Entry Level 1 (A1) → A1 Secure progression</li>
+                        <li>£499 per learner</li>
+                        <li>Online delivery (2 x 90-min sessions/week)</li>
+                        <li>Week 10 volunteering placements</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Deliver -->
+        <section id="delivery">
+            <h2 class="section-title">What We Deliver</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">📚</div>
+                    <div class="feature-content">
+                        <h4>Bespoke Curriculum</h4>
+                        <p>Co-designed with Stockport Homes, focused on housing, UC, jobs, NHS, and digital skills that tenants actually need.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-content">
+                        <h4>Experienced Tutor</h4>
+                        <p>Qualified ESOL educator with culturally responsive teaching and high student talk time (60%+ of lesson).</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">💻</div>
+                    <div class="feature-content">
+                        <h4>Online & Accessible</h4>
+                        <p>Fully online via Microsoft Teams. No transport barriers = high attendance. Flexible for cultural/religious needs.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h4>Rigorous Outcomes</h4>
+                        <p>Track attendance, language progression, UC/housing/employment skills, digital literacy, placement success.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">🤝</div>
+                    <div class="feature-content">
+                        <h4>Week 10 Volunteering</h4>
+                        <p>Learners volunteer with Stockport Homes, gaining work experience. You get volunteer labour + assessment data.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-content">
+                        <h4>Partner with Evidence</h4>
+                        <p>Funder-ready outcome reports strengthen your GMCA, Big Lottery, and trust fund applications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Content -->
+        <section id="curriculum">
+            <h2 class="section-title">Curriculum Topics</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>🏠 Housing & Tenancy</h3>
+                    <p>Tenancy agreements, repair requests, landlord communication, tenant rights, neighbourhood relations.</p>
+                </div>
+                <div class="card">
+                    <h3>💷 Universal Credit</h3>
+                    <p>Navigating UC portal, reporting changes, understanding entitlements, recording commitments, appeals.</p>
+                </div>
+                <div class="card">
+                    <h3>💼 Job Hunting</h3>
+                    <p>CVs, job applications, interview skills, workplace communication, employment rights.</p>
+                </div>
+                <div class="card">
+                    <h3>🏥 NHS & Health</h3>
+                    <p>Booking appointments, prescriptions, health information, mental health services access.</p>
+                </div>
+                <div class="card">
+                    <h3>💻 Digital Skills</h3>
+                    <p>Microsoft 365, Teams, email, online job portals, online banking basics.</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 Confidence & Independence</h3>
+                    <p>Assertive communication, asking for help, navigating systems, building social connections.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Outcomes -->
+        <section id="outcomes">
+            <h2 class="section-title">What We Measure</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">Rigorous outcome tracking across multiple dimensions:</p>
+            <div class="grid-2">
+                <div class="outcome-item">
+                    <h4>Language Progression</h4>
+                    <p>Pre-A1 entry → A1 Secure exit. Learners can reliably and independently handle practical English.</p>
+                </div>
+                <div class="outcome-item">
+                    <h4>UC Skills</h4>
+                    <p>Navigate portal, understand entitlements, record commitments, manage UC journal independently.</p>
+                </div>
+                <div class="outcome-item">
+                    <h4>Housing Skills</h4>
+                    <p>Read & understand tenancy agreements, submit repair requests, communicate with landlord.</p>
+                </div>
+                <div class="outcome-item">
+                    <h4>Employment Readiness</h4>
+                    <p>CV completion, job application forms, interview confidence, workplace communication.</p>
+                </div>
+                <div class="outcome-item">
+                    <h4>Digital Literacy</h4>
+                    <p>Teams video conferencing, email, online forms, online banking, job portals.</p>
+                </div>
+                <div class="outcome-item">
+                    <h4>Placement Success</h4>
+                    <p>Hours completed, supervisor feedback, learner confidence, employment pathways.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partnership Terms -->
+        <section id="terms">
+            <h2 class="section-title">Partnership Terms</h2>
+            <div class="grid-2">
+                <div>
+                    <h3 class="section-subtitle">What Stockport Homes Provides</h3>
+                    <div class="highlight-box">
+                        <ul>
+                            <li>Funding: £499 per learner per cohort</li>
+                            <li>Learner referral: 10–12 per cohort</li>
+                            <li>Co-design input on curriculum</li>
+                            <li>Host Week 10 volunteering placements</li>
+                            <li>Comms support (newsletter mentions, tenant comms)</li>
+                            <li>Permission to use outcomes in grant applications</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="section-subtitle">What We Provide</h3>
+                    <div class="highlight-box">
+                        <ul>
+                            <li>Bespoke curriculum & all materials</li>
+                            <li>Experienced, culturally responsive tutor</li>
+                            <li>Weekly progress updates</li>
+                            <li>Mid-cohort feedback calls (Week 5)</li>
+                            <li>Placement coordination & check-ins</li>
+                            <li>Funder-ready outcomes reports</li>
+                            <li>Co-branded materials & visibility</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline">
+            <h2 class="section-title">Proposed Timeline</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">1</div>
+                    <div class="feature-content">
+                        <h4>June 2025</h4>
+                        <p>Partnership agreement signed; learner profile and referral process agreed.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">2</div>
+                    <div class="feature-content">
+                        <h4>Early-Mid June 2025</h4>
+                        <p>Co-design call with Stockport Homes to shape curriculum priorities and identify Week 10 placement opportunities.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">3</div>
+                    <div class="feature-content">
+                        <h4>Mid-Late June 2025</h4>
+                        <p>Cohort 1 recruitment launches; diagnostic assessments conducted with prospective learners.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">4</div>
+                    <div class="feature-content">
+                        <h4>Late June – August 2025</h4>
+                        <p>Cohort 1 delivered (10 weeks). Mid-cohort feedback at Week 5. Week 10 volunteering placements.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">5</div>
+                    <div class="feature-content">
+                        <h4>September 2025+</h4>
+                        <p>Rolling intake; Cohort 2 and beyond. New cohorts starting every 4–6 weeks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="contact-card">
+                <h2>Ready to Discuss?</h2>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">We'd welcome the opportunity for a 20-minute call to discuss this partnership and understand your tenant priorities.</p>
+                <div class="contact-info">
+                    <div>
+                        <strong>Email:</strong><br>
+                        <a href="mailto:Kenneth.Moore@stockportlanguagecentre.org.uk">Kenneth.Moore@stockportlanguagecentre.org.uk</a>
+                    </div>
+                    <div>
+                        <strong>Phone:</strong><br>
+                        <a href="tel:07737323009">07737 323 009</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Document Download -->
+        <section style="text-align: center; margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Want the Full Proposal?</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">Download our detailed partnership proposal document:</p>
+            <a href="#" class="btn btn-primary">Download Proposal (PDF)</a>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">v1.0 DRAFT | May 2025 | Open to feedback</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Stockport Language Centre CIC. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Registered with ICO | UK GDPR Compliant</p>
+    </footer>
+</body>
+</html>
