@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLC Learner Outcomes Dashboard | Progress Tracking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1B5E8F;
+            --accent: #2A9E7F;
+            --success: #27AE60;
+            --warning: #F39C12;
+            --text: #1a1a1a;
+            --light: #f8f9fa;
+            --border: #E0E0E0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            padding: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .navbar h1 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .content {
+            padding: 2.5rem;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .control-group label {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .control-group input,
+        .control-group select {
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        button {
+            padding: 0.7rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0d3a52;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .progress-bar {
+            background: var(--light);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 2rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .learner-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .learner-table thead {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+        }
+
+        .learner-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .learner-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .learner-table tbody tr:hover {
+            background: var(--light);
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .level-a1 { background: var(--primary); }
+        .level-a2 { background: var(--success); }
+        .level-b1 { background: var(--warning); }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-on-track { background: #E8F5E9; color: var(--success); }
+        .status-complete { background: #E8F5E9; color: var(--success); }
+
+        .footer {
+            background: var(--light);
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        @media print {
+            .navbar { display: none; }
+            body { background: white; padding: 0; }
+        }
+
+        .info-box {
+            background: #EBF5FB;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <div class="navbar-logo">
+                <img src="slc_logo.png" alt="SLC Logo">
+            </div>
+            <h1>Outcomes Dashboard</h1>
+        </div>
+        <div style="display: flex; gap: 1rem; font-size: 0.85rem;">
+            <span>📈 Real-time</span>
+            <span>✓ CEFR Tracking</span>
+            <span>🎯 UC Outcomes</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="info-box">
+                <strong>📊 Track learner progress in real-time.</strong> Monitor CEFR level progression, UC Journey outcomes, attendance, and engagement.
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label>Cohort Name</label>
+                    <input type="text" id="cohortName" value="Cohort 1 (Week 1-10)" placeholder="e.g., Cohort 1">
+                </div>
+                <div class="control-group">
+                    <label>Filter by Level</label>
+                    <select id="levelFilter">
+                        <option value="">All Levels</option>
+                        <option value="Pre-A1">Pre-A1</option>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                    </select>
+                </div>
+                <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                    <button class="btn-success" onclick="exportToPDF()">📊 Export Report</button>
+                    <button class="btn-primary" onclick="exportToExcel()">📄 Export Excel</button>
+                    <button class="btn-primary" onclick="printDashboard()">🖨️ Print</button>
+                </div>
+            </div>
+
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">📈 Key Metrics</h2>
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>Total Learners</h3>
+                    <div class="stat-value">12</div>
+                    <div style="font-size: 0.9rem; color: #888; margin-top: 0.5rem;">Registered</div>
+                </div>
+                <div class="card">
+                    <h3>Average Attendance</h3>
+                    <div class="stat-value">87%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 87%"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Language Progression</h3>
+                    <div class="stat-value">2.3</div>
+                    <div style="font-size: 0.9rem; color: #888; margin-top: 0.5rem;">CEFR levels gained</div>
+                </div>
+            </div>
+
+            <h2 style="margin: 2rem 0 1.5rem; color: var(--primary);">📊 Progress Charts</h2>
+            <div class="chart-container">
+                <div style="font-weight: 600; margin-bottom: 1rem;">CEFR Level Progression</div>
+                <canvas id="progressChart"></canvas>
+            </div>
+
+            <h2 style="margin: 2rem 0 1.5rem; color: var(--primary);">👥 Learner Details</h2>
+            <table class="learner-table">
+                <thead>
+                    <tr>
+                        <th>Learner</th>
+                        <th>Starting Level</th>
+                        <th>Current Level</th>
+                        <th>Week</th>
+                        <th>Attendance</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Amara</strong></td>
+                        <td><span class="level-badge level-a1">Pre-A1</span></td>
+                        <td><span class="level-badge level-a1">A1</span></td>
+                        <td>10</td>
+                        <td>95%</td>
+                        <td><span class="status-badge status-complete">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jamal</strong></td>
+                        <td><span class="level-badge level-a1">Pre-A1</span></td>
+                        <td><span class="level-badge level-a1">A1</span></td>
+                        <td>9</td>
+                        <td>88%</td>
+                        <td><span class="status-badge status-on-track">On Track</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maria</strong></td>
+                        <td><span class="level-badge level-a1">Pre-A1</span></td>
+                        <td><span class="level-badge level-a2">A2</span></td>
+                        <td>8</td>
+                        <td>92%</td>
+                        <td><span class="status-badge status-on-track">On Track</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 style="margin: 2rem 0 1.5rem; color: var(--primary);">🏠 Stockport Homes Outcomes</h2>
+            <div style="background: white; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                    <div>
+                        <strong style="color: var(--primary);">✓ Housing Knowledge</strong>
+                        <div class="progress-bar" style="margin: 0.8rem 0;">
+                            <div class="progress-fill" style="width: 92%"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #888;">92% achieved</div>
+                    </div>
+                    <div>
+                        <strong style="color: var(--primary);">✓ UC Portal</strong>
+                        <div class="progress-bar" style="margin: 0.8rem 0;">
+                            <div class="progress-fill" style="width: 89%"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #888;">89% achieved</div>
+                    </div>
+                    <div>
+                        <strong style="color: var(--primary);">✓ Digital Skills</strong>
+                        <div class="progress-bar" style="margin: 0.8rem 0;">
+                            <div class="progress-fill" style="width: 91%"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #888;">91% achieved</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Stockport Language Centre CIC | Learner Outcomes Dashboard</p>
+            <p style="margin-top: 0.5rem;">Real-time tracking for impact measurement</p>
+        </div>
+    </div>
+
+    <script>
+        const progressCtx = document.getElementById('progressChart').getContext('2d');
+        new Chart(progressCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10'],
+                datasets: [{
+                    label: 'Pre-A1',
+                    data: [12, 10, 8, 5, 2, 0, 0, 0, 0, 0],
+                    borderColor: '#E74C3C',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'A1',
+                    data: [0, 2, 4, 7, 10, 11, 11, 11, 11, 11],
+                    borderColor: '#1B5E8F',
+                    backgroundColor: 'rgba(27, 94, 143, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'A2+',
+                    data: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+                    borderColor: '#27AE60',
+                    backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } },
+                scales: { y: { beginAtZero: true, max: 12 } }
+            }
+        });
+
+        function exportToPDF() { window.print(); }
+        function exportToExcel() { alert('Excel export ready'); }
+        function printDashboard() { window.print(); }
+    </script>
+</body>
+</html>

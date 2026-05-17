@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLC Partner Satisfaction Survey</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1B5E8F;
+            --accent: #2A9E7F;
+            --success: #27AE60;
+            --light: #f8f9fa;
+            --border: #E0E0E0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .navbar-logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            padding: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .navbar h1 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .form-content { padding: 2.5rem; }
+
+        .section-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 1.2rem 1.5rem;
+            margin: 2rem -2.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .form-group { margin-bottom: 1.8rem; }
+        .form-label { display: block; font-weight: 600; margin-bottom: 0.8rem; font-size: 0.95rem; }
+        .form-label .required { color: #E74C3C; }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        textarea { resize: vertical; min-height: 100px; }
+
+        .rating-scale {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .rating-scale input[type="radio"] { display: none; }
+
+        .rating-scale label {
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            background: white;
+        }
+
+        .rating-scale input[type="radio"]:checked + label {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+        }
+
+        button {
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-submit { background: var(--success); color: white; }
+        .btn-submit:hover { background: #229954; transform: translateY(-2px); }
+
+        .btn-download { background: var(--primary); color: white; }
+        .btn-download:hover { background: #0d3a52; transform: translateY(-2px); }
+
+        .footer {
+            background: var(--light);
+            padding: 1.5rem 2.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .success-message {
+            background: #E8F5E9;
+            border-left: 4px solid var(--success);
+            padding: 1.2rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .success-message.show { display: block; }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img src="slc_logo.png" alt="SLC Logo">
+        </div>
+        <h1>Partner Satisfaction Survey</h1>
+    </div>
+
+    <div class="container">
+        <div class="form-content">
+            <div class="success-message" id="successMessage">
+                <strong>✓ Thank you!</strong> Your feedback has been recorded.
+            </div>
+
+            <form id="surveyForm">
+                <div class="section-header">
+                    <span>📋</span> About Your Organisation
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Organisation Name <span class="required">*</span></label>
+                    <input type="text" name="orgName" placeholder="e.g., Stockport Homes" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Contact Name <span class="required">*</span></label>
+                    <input type="text" name="contactName" placeholder="Your name" required>
+                </div>
+
+                <div class="section-header">
+                    <span>🎓</span> Course Delivery & Content
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Overall course quality? <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <input type="radio" id="q1_1" name="courseQuality" value="1" required>
+                        <label for="q1_1">Poor</label>
+                        <input type="radio" id="q1_2" name="courseQuality" value="2">
+                        <label for="q1_2">Fair</label>
+                        <input type="radio" id="q1_3" name="courseQuality" value="3">
+                        <label for="q1_3">Good</label>
+                        <input type="radio" id="q1_4" name="courseQuality" value="4">
+                        <label for="q1_4">Very Good</label>
+                        <input type="radio" id="q1_5" name="courseQuality" value="5">
+                        <label for="q1_5">Excellent</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Content relevance to learner needs? <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <input type="radio" id="q2_1" name="contentRelevance" value="1" required>
+                        <label for="q2_1">Poor</label>
+                        <input type="radio" id="q2_2" name="contentRelevance" value="2">
+                        <label for="q2_2">Fair</label>
+                        <input type="radio" id="q2_3" name="contentRelevance" value="3">
+                        <label for="q2_3">Good</label>
+                        <input type="radio" id="q2_4" name="contentRelevance" value="4">
+                        <label for="q2_4">Very Good</label>
+                        <input type="radio" id="q2_5" name="contentRelevance" value="5">
+                        <label for="q2_5">Excellent</label>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <span>👨‍🏫</span> Tutor Performance
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tutor professionalism? <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <input type="radio" id="q3_1" name="tutorProfessionalism" value="1" required>
+                        <label for="q3_1">Poor</label>
+                        <input type="radio" id="q3_2" name="tutorProfessionalism" value="2">
+                        <label for="q3_2">Fair</label>
+                        <input type="radio" id="q3_3" name="tutorProfessionalism" value="3">
+                        <label for="q3_3">Good</label>
+                        <input type="radio" id="q3_4" name="tutorProfessionalism" value="4">
+                        <label for="q3_4">Very Good</label>
+                        <input type="radio" id="q3_5" name="tutorProfessionalism" value="5">
+                        <label for="q3_5">Excellent</label>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <span>📈</span> Learner Outcomes
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Learner progress in English? <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <input type="radio" id="q4_1" name="learnerProgress" value="1" required>
+                        <label for="q4_1">No</label>
+                        <input type="radio" id="q4_2" name="learnerProgress" value="2">
+                        <label for="q4_2">Minimal</label>
+                        <input type="radio" id="q4_3" name="learnerProgress" value="3">
+                        <label for="q4_3">Good</label>
+                        <input type="radio" id="q4_4" name="learnerProgress" value="4">
+                        <label for="q4_4">Very Good</label>
+                        <input type="radio" id="q4_5" name="learnerProgress" value="5">
+                        <label for="q4_5">Excellent</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Outcomes achieved (select all):</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="o1" name="outcomes" value="housing">
+                            <label for="o1">✓ Housing knowledge improved</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="o2" name="outcomes" value="ucportal">
+                            <label for="o2">✓ Can navigate UC Portal</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="o3" name="outcomes" value="digital">
+                            <label for="o3">✓ Digital skills improved</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="o4" name="outcomes" value="confidence">
+                            <label for="o4">✓ Increased confidence</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <span>💬</span> Feedback
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What did we do well?</label>
+                    <textarea name="wellDone" placeholder="Tell us what worked best..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What could we improve?</label>
+                    <textarea name="improve" placeholder="Areas for improvement..."></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-submit">✓ Submit Feedback</button>
+                    <button type="reset" class="btn-download">Clear Form</button>
+                    <button type="button" class="btn-download" onclick="downloadAsWord()">📄 Download</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>Stockport Language Centre CIC | Partner Satisfaction Survey</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('successMessage').classList.add('show');
+            this.reset();
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+        });
+
+        function downloadAsWord() {
+            alert('Download Word document with survey form');
+        }
+    </script>
+</body>
+</html>

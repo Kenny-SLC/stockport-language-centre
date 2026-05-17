@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLC Lesson Planner | Professional Planning Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1B5E8F;
+            --accent: #2A9E7F;
+            --success: #27AE60;
+            --light: #f8f9fa;
+            --border: #E0E0E0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .navbar-logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            padding: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .navbar h1 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.8rem;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        textarea { resize: vertical; min-height: 70px; }
+
+        button {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-generate {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-generate:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .btn-export {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-export:hover {
+            background: #0d3a52;
+        }
+
+        .output {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .lesson-content {
+            background: white;
+            padding: 2rem;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .activity-box {
+            background: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .activity-title { font-weight: 700; color: var(--primary); }
+        .activity-time { font-size: 0.85rem; color: #888; margin: 0.3rem 0; }
+
+        .grouping-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            margin-right: 0.5rem;
+        }
+
+        .pair-work { background: #3498DB; }
+        .trio-work { background: #9B59B6; }
+        .group-work { background: #E74C3C; }
+        .whole-class { background: var(--accent); }
+
+        .no-content {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: auto; }
+        }
+
+        @media print {
+            .navbar, .sidebar { display: none; }
+            .main-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img src="slc_logo.png" alt="SLC Logo">
+        </div>
+        <h1>Lesson Planner</h1>
+    </div>
+
+    <div class="container">
+        <div class="main-grid">
+            <div class="sidebar">
+                <h2>📝 Lesson Details</h2>
+                <form id="plannerForm">
+                    <div class="form-group">
+                        <label class="form-label">Lesson Topic *</label>
+                        <input type="text" id="topic" placeholder="e.g., Housing Rights" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">CEFR Level *</label>
+                        <select id="level" required>
+                            <option value="">Select...</option>
+                            <option value="Pre-A1">Pre-A1</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Week (1-10) *</label>
+                        <input type="number" id="week" min="1" max="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Key Vocabulary *</label>
+                        <textarea id="vocab" placeholder="landlord, tenant, lease..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Learning Outcomes</label>
+                        <textarea id="outcomes" placeholder="By the end learners will be able to..."></textarea>
+                    </div>
+
+                    <button type="button" class="btn-generate" onclick="generatePlan()">
+                        🚀 Generate Lesson Plan
+                    </button>
+                    <button type="button" class="btn-export" onclick="exportWord()" style="display: none;" id="exportBtn">
+                        📄 Export as Word
+                    </button>
+                </form>
+            </div>
+
+            <div class="output">
+                <div id="planOutput">
+                    <div class="no-content">
+                        <h3>👈 Fill the form to generate</h3>
+                        <p>Complete 90-minute lesson plan ready to teach</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generatePlan() {
+            const topic = document.getElementById('topic').value;
+            const level = document.getElementById('level').value;
+            const week = document.getElementById('week').value;
+            const vocab = document.getElementById('vocab').value;
+            const outcomes = document.getElementById('outcomes').value;
+
+            if (!topic || !level || !week || !vocab) {
+                alert('Please fill required fields');
+                return;
+            }
+
+            const today = new Date().toLocaleDateString('en-GB');
+
+            let html = `
+                <div class="lesson-content">
+                    <div style="border-bottom: 3px solid var(--primary); padding-bottom: 1.5rem; margin-bottom: 2rem;">
+                        <div style="font-size: 1.8rem; color: var(--primary); font-weight: 700; margin-bottom: 0.8rem;">${topic}</div>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                            <div style="background: var(--light); padding: 0.8rem; border-radius: 4px;">
+                                <div style="font-size: 0.7rem; color: #888; font-weight: 600; text-transform: uppercase;">Level</div>
+                                <div style="font-weight: 600;">${level}</div>
+                            </div>
+                            <div style="background: var(--light); padding: 0.8rem; border-radius: 4px;">
+                                <div style="font-size: 0.7rem; color: #888; font-weight: 600; text-transform: uppercase;">Week</div>
+                                <div style="font-weight: 600;">Week ${week}/10</div>
+                            </div>
+                            <div style="background: var(--light); padding: 0.8rem; border-radius: 4px;">
+                                <div style="font-size: 0.7rem; color: #888; font-weight: 600; text-transform: uppercase;">Duration</div>
+                                <div style="font-weight: 600;">90 minutes</div>
+                            </div>
+                            <div style="background: var(--light); padding: 0.8rem; border-radius: 4px;">
+                                <div style="font-size: 0.7rem; color: #888; font-weight: 600; text-transform: uppercase;">Learners</div>
+                                <div style="font-weight: 600;">12</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <div class="section-header">🎯 Learning Outcomes</div>
+                        <p>${outcomes || 'Learners will understand and use key vocabulary in context. Learners will participate in communicative activities. Learners will demonstrate increased confidence.'}</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <div class="section-header">⏱️ 90-Minute Structure</div>
+                        
+                        <div class="activity-box">
+                            <div class="activity-title">1. Warm-up & Greeting</div>
+                            <div class="activity-time">⏱️ 10 minutes</div>
+                            <span class="grouping-badge whole-class">Whole Class</span>
+                            <p>Welcome learners. Brief review of previous lesson. Set agenda.</p>
+                        </div>
+
+                        <div class="activity-box">
+                            <div class="activity-title">2. Vocabulary Presentation</div>
+                            <div class="activity-time">⏱️ 15 minutes</div>
+                            <span class="grouping-badge whole-class">Whole Class</span>
+                            <p>Introduce key vocabulary with visuals and examples. Pronunciation practice.</p>
+                        </div>
+
+                        <div class="activity-box">
+                            <div class="activity-title">3. Pair Work - Vocabulary Practice</div>
+                            <div class="activity-time">⏱️ 15 minutes</div>
+                            <span class="grouping-badge pair-work">Pair Work (6 pairs)</span>
+                            <p>Learners in Teams breakout rooms. Matching, dialogue, or card sort activities.</p>
+                        </div>
+
+                        <div class="activity-box">
+                            <div class="activity-title">4. Trio Work - Grammar/Language Point</div>
+                            <div class="activity-time">⏱️ 15 minutes</div>
+                            <span class="grouping-badge trio-work">Trio Work (4 trios)</span>
+                            <p>Explain grammar point. Each trio applies it to one example. Report back.</p>
+                        </div>
+
+                        <div class="activity-box">
+                            <div class="activity-title">5. Group Work - Main Activity</div>
+                            <div class="activity-time">⏱️ 20 minutes</div>
+                            <span class="grouping-badge group-work">Group Work (4 groups of 3)</span>
+                            <p>Scenario-based task using vocabulary. High student talk time (3-4+ mins per learner).</p>
+                        </div>
+
+                        <div class="activity-box">
+                            <div class="activity-title">6. Class Feedback</div>
+                            <div class="activity-time">⏱️ 10 minutes</div>
+                            <span class="grouping-badge whole-class">Whole Class</span>
+                            <p>Each group shares. Celebrate effort. Gently correct errors. Reinforce learning.</p>
+                        </div>
+
+                        <div class="activity-box">
+                            <div class="activity-title">7. Exit Ticket Assessment</div>
+                            <div class="activity-time">⏱️ 5 minutes</div>
+                            <span class="grouping-badge">Individual</span>
+                            <p>Each learner says one word/sentence using key vocabulary. Record progress.</p>
+                        </div>
+                    </div>
+
+                    <div style="margin: 2rem 0; padding: 1.2rem; background: #FFF8E6; border-left: 4px solid #F39C12; border-radius: 4px;">
+                        <strong style="color: #F39C12;">📝 Resources Needed:</strong>
+                        <p style="margin-top: 0.5rem;">Teams with breakout room capability, screen share, visuals for vocabulary, timer for activities, flipchart/Jamboard for group work.</p>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); color: #888; font-size: 0.85rem;">
+                        <p>SLC Lesson Plan | Generated ${today}</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('planOutput').innerHTML = html;
+            document.getElementById('exportBtn').style.display = 'block';
+        }
+
+        function exportWord() {
+            const content = document.getElementById('planOutput').innerHTML;
+            if (!content.includes('90-Minute')) {
+                alert('Generate a plan first');
+                return;
+            }
+            
+            const html = `<html><head><meta charset="UTF-8"><style>
+                body { font-family: Calibri; margin: 1in; }
+            </style></head><body>${content}</body></html>`;
+            
+            const blob = new Blob([html], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `SLC_Lesson_Plan_${new Date().toISOString().split('T')[0]}.doc`;
+            link.click();
+        }
+    </script>
+</body>
+</html>

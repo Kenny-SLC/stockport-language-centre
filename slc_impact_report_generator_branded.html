@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLC Impact Report Generator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1B5E8F;
+            --accent: #2A9E7F;
+            --success: #27AE60;
+            --light: #f8f9fa;
+            --border: #E0E0E0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .navbar-logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            padding: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .navbar h1 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: var(--light);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .content {
+            padding: 2.5rem;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.8rem;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        textarea { resize: vertical; min-height: 80px; }
+
+        button {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-generate {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-generate:hover {
+            background: #1e8a6f;
+            transform: translateY(-2px);
+        }
+
+        .btn-download {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #0d3a52;
+        }
+
+        .report {
+            background: white;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .report-header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+            border-left: 4px solid var(--success);
+            padding: 1.2rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .no-report {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+        }
+
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .sidebar { position: relative; }
+        }
+
+        @media print {
+            .navbar, .sidebar { display: none; }
+            .main-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img src="slc_logo.png" alt="SLC Logo">
+        </div>
+        <h1>Impact Report Generator</h1>
+    </div>
+
+    <div class="main-grid">
+        <div class="sidebar">
+            <h2>📝 Report Details</h2>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label class="form-label">Report Title *</label>
+                    <input type="text" id="title" placeholder="e.g., Stockport Homes Impact Report" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Reporting Period *</label>
+                    <input type="text" id="period" placeholder="e.g., May - August 2025" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Partner Name *</label>
+                    <input type="text" id="partner" value="Stockport Homes" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Total Learners *</label>
+                    <input type="number" id="totalLearners" value="12" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Completion Rate (%) *</label>
+                    <input type="number" id="completionRate" value="92" min="0" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Housing Achievement (%) *</label>
+                    <input type="number" id="housingAchieve" value="92" min="0" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">UC Portal Achievement (%) *</label>
+                    <input type="number" id="ucAchieve" value="89" min="0" max="100" required>
+                </div>
+
+                <button type="button" class="btn-generate" onclick="generateReport()">📊 Generate Report</button>
+                <button type="button" class="btn-download" onclick="exportWord()" style="display: none;" id="downloadBtn">📄 Download Word</button>
+            </form>
+        </div>
+
+        <div class="content">
+            <div id="reportOutput">
+                <div class="no-report">
+                    <h3>👈 Fill form to generate report</h3>
+                    <p>Professional funder-ready impact report</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Stockport Language Centre CIC | Impact Report Generator</p>
+    </div>
+
+    <script>
+        function generateReport() {
+            const title = document.getElementById('title').value;
+            const period = document.getElementById('period').value;
+            const partner = document.getElementById('partner').value;
+            const totalLearners = document.getElementById('totalLearners').value;
+            const completionRate = document.getElementById('completionRate').value;
+            const housingAchieve = document.getElementById('housingAchieve').value;
+            const ucAchieve = document.getElementById('ucAchieve').value;
+
+            if (!title || !period || !partner) {
+                alert('Please fill required fields');
+                return;
+            }
+
+            const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+            let html = `
+                <div class="report">
+                    <div class="report-header">
+                        <div class="report-title">${title}</div>
+                        <p style="font-size: 1.05rem; color: #666;">Partnership with ${partner}</p>
+                        <p style="margin-top: 1rem; color: #888; font-size: 0.9rem;">${period}</p>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <div class="section-header">📈 Executive Summary</div>
+                        <p>This report presents the impact and outcomes of the Stockport Language Centre ESOL pilot partnership with ${partner}, running from ${period}. The programme delivered practical English language training to ${totalLearners} adult learners.</p>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <div class="section-header">📊 Key Metrics</div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                            <div class="stat-box">
+                                <div class="number">${totalLearners}</div>
+                                <div style="color: #888; margin-top: 0.5rem;">Learners Enrolled</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="number">${completionRate}%</div>
+                                <div style="color: #888; margin-top: 0.5rem;">Completion Rate</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="number">87%</div>
+                                <div style="color: #888; margin-top: 0.5rem;">Average Attendance</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <div class="section-header">🏠 Stockport Homes Outcomes</div>
+                        <ul style="list-style: none; margin: 1rem 0;">
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Housing Knowledge: ${housingAchieve}% of learners achieved
+                            </li>
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                UC Portal Navigation: ${ucAchieve}% of learners can navigate independently
+                            </li>
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Digital Skills: Improved Teams, email, online forms
+                            </li>
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Confidence Building: 100% of learners gained confidence
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <div class="section-header">💪 What Worked Well</div>
+                        <ul style="list-style: none; margin: 1rem 0;">
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Online delivery eliminated transport barriers
+                            </li>
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                High student talk time built fluency
+                            </li>
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Real-world UC focus kept learning practical
+                            </li>
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Peer support built community
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <div class="section-header">🚀 Recommendations for Expansion</div>
+                        <ul style="list-style: none; margin: 1rem 0;">
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Scale to 2-3 concurrent cohorts (30-36 learners/year)
+                            </li>
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Expand to A2/B1 levels for continued learning
+                            </li>
+                            <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--success); font-weight: bold;">✓</span>
+                                Track employment outcomes at 6 months
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); color: #888; font-size: 0.9rem;">
+                        <p>Generated: ${today} | Stockport Language Centre CIC</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('reportOutput').innerHTML = html;
+            document.getElementById('downloadBtn').style.display = 'block';
+        }
+
+        function exportWord() {
+            const content = document.getElementById('reportOutput').innerHTML;
+            if (!content.includes('report')) {
+                alert('Generate a report first');
+                return;
+            }
+            
+            const html = `<html><head><meta charset="UTF-8"><style>
+                body { font-family: Calibri; margin: 1in; }
+                h1 { color: #1B5E8F; }
+                .section-header { background: #1B5E8F; color: white; padding: 10px; }
+            </style></head><body>${content}</body></html>`;
+            
+            const blob = new Blob([html], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `SLC_Impact_Report_${new Date().toISOString().split('T')[0]}.doc`;
+            link.click();
+        }
+    </script>
+</body>
+</html>
