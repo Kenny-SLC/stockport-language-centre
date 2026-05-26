@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockport Homes Partnership – ESOL & Employment Support | Stockport Language Centre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #1B7A8C;
+            --teal-light: #2B9BA8;
+            --green: #6BA545;
+            --orange: #E67E22;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --border: #E0E0E0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: var(--white);
+            padding: 4px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            border-bottom-color: var(--orange);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--teal);
+            margin-bottom: 1rem;
+            border-bottom: 3px solid var(--orange);
+            padding-bottom: 1rem;
+        }
+
+        .subheading {
+            font-size: 1.4rem;
+            color: var(--orange);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--teal);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--orange);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--teal);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 3px solid var(--orange);
+        }
+
+        .intro-box h2 {
+            color: var(--white);
+            border: none;
+            padding: 0;
+            margin-top: 0;
+        }
+
+        .intro-box p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .highlight-box {
+            background: #e8f4f8;
+            border-left: 4px solid var(--orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+        }
+
+        .highlight-box strong {
+            color: var(--teal);
+        }
+
+        .problem-box {
+            background: #fff3cd;
+            border-left: 4px solid var(--orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--teal);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--teal);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline {
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--orange);
+            border-radius: 50%;
+            border: 3px solid var(--teal);
+        }
+
+        .timeline-item strong {
+            color: var(--teal);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .pilot-vs-full {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .pilot-box, .full-box {
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+        }
+
+        .pilot-box {
+            background: #e8f4f8;
+            border-top: 4px solid var(--orange);
+        }
+
+        .full-box {
+            background: #f0f8f6;
+            border-top: 4px solid var(--green);
+        }
+
+        .pilot-box h3, .full-box h3 {
+            margin-top: 0;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.7rem;
+            line-height: 1.7;
+        }
+
+        .contact-box {
+            background: #fff3cd;
+            border: 2px solid var(--orange);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .contact-box strong {
+            color: #856404;
+        }
+
+        .contact-box p {
+            margin: 1rem 0;
+        }
+
+        .contact-info {
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+
+        .btn {
+            background: var(--orange);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #d65a0f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--teal);
+        }
+
+        .btn-secondary:hover {
+            background: #165a6a;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--green);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .benefit-item strong {
+            color: var(--teal);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: var(--teal);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                gap: 1rem;
+                flex-basis: 100%;
+                justify-content: center;
+            }
+
+            .two-column, .pilot-vs-full {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="images/Stock_Lan_LOGO_2.png" alt="Stockport Language Centre Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Stockport Language Centre</h1>
+                    <p>Practical English for Real Life</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="programme.html">Programme</a>
+                <a href="about.html">About</a>
+                <a href="partners.html">All Partners</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Partnership with Stockport Homes</h1>
+        <p class="subheading">ESOL & Employment Support for Your UC Tenant Residents</p>
+
+        <div class="intro-box">
+            <h2>Why This Matters for Stockport Homes</h2>
+            <p>Your UC claimant residents face a specific barrier: <strong>language skills for employment.</strong> They need English for UC appointments, job interviews, and workplace communication. But generic ESOL courses feel disconnected from their actual journey.</p>
+            <p><strong>We've built something different—aligned specifically to the UC pathway and employment outcomes.</strong> And we're looking to partner with Stockport Homes because you understand your residents' needs better than anyone.</p>
+        </div>
+
+        <!-- The Problem -->
+        <h2>The Reality for Your Residents</h2>
+
+        <div class="problem-box">
+            <p><strong>Your UC claimant residents with ESOL needs struggle with:</strong></p>
+            <ul>
+                <li>Attending Job Centre appointments with confidence</li>
+                <li>Filling job application forms and CVs in English</li>
+                <li>Understanding UC letters, documents, and procedures</li>
+                <li>Job interviews and workplace communication</li>
+                <li>Building employment confidence and resilience</li>
+            </ul>
+            <p><strong>The gap:</strong> They know they need English for work, but generic ESOL courses don't connect to their immediate UC journey. They drop out because it doesn't feel relevant.</p>
+        </div>
+
+        <!-- What We Offer SH -->
+        <h2>What Stockport Language Centre Offers Stockport Homes</h2>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Referral Pathway</h3>
+                <p>Simple, low-admin referrals for your UC claimant residents. We handle assessment, teaching, progress tracking, and CEFR measurement. You just identify and refer.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💼</div>
+                <h3>Work-Experience Placements (Full Course)</h3>
+                <p>In the full 9-week course (September 2026+), Week 10 is a voluntary work-experience placement. Your residents finish with real workplace practice and CV experience.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Evidence & Outcomes</h3>
+                <p>You get regular updates on referrals' progress: CEFR improvement, learner feedback, and employment readiness. Data you can use for your outcomes reporting.</p>
+            </div>
+        </div>
+
+        <!-- Pilot vs Full Course -->
+        <h2>What's Available Now vs. September</h2>
+
+        <div class="pilot-vs-full">
+            <div class="pilot-box">
+                <h3>🟡 PILOT (July–August 2026)</h3>
+                <p><strong>6-week intensive</strong></p>
+                <ul>
+                    <li>Separate cohorts: Pre-A1 OR A1 (choose your level)</li>
+                    <li>2 × 90-min sessions/week</li>
+                    <li>Online via Teams</li>
+                    <li>Free for learners</li>
+                    <li><strong>No Week 10 placement</strong> (pilot phase)</li>
+                    <li>CEFR entry & exit assessment</li>
+                </ul>
+                <p style="margin-top: 1.5rem; font-size: 0.95rem;"><strong>Your role:</strong> Refer residents. Provide feedback. Help test the model.</p>
+            </div>
+
+            <div class="full-box">
+                <h3>🟢 FULL COURSE (September 2026+)</h3>
+                <p><strong>9-week + Week 10 placement</strong></p>
+                <ul>
+                    <li>Separate cohorts (Pre-A1, A1, and post-funding: female-only)</li>
+                    <li>Female-only cohorts (post-funding)</li>
+                    <li>2 × 90-min sessions/week</li>
+                    <li>Online via Teams</li>
+                    <li>Free for learners</li>
+                    <li><strong>Week 10 = Voluntary Placement</strong></li>
+                    <li>CEFR assessment + placement support</li>
+                </ul>
+                <p style="margin-top: 1.5rem; font-size: 0.95rem;"><strong>Your role:</strong> Referrals + placements. Your residents get work experience.</p>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <h2>The Partnership Timeline</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Now – End May 2026</strong>
+                <p>Pilot recruitment. SH and other partners identify residents for 6-week pilot cohorts.</p>
+            </div>
+
+            <div class="timeline-item">
+                <strong>1st Monday July – 15th August 2026</strong>
+                <p><strong>PILOT RUNS.</strong> 6-week intensive cohorts. Your residents learn, improve CEFR, build confidence. No placements (pilot focused on learning). Feedback on what works.</p>
+            </div>
+
+            <div class="timeline-item">
+                <strong>August – September 2026</strong>
+                <p>Evidence gathering. We compile CEFR data, learner feedback, outcomes. GMCA/National Lottery funding applications (using pilot evidence).</p>
+            </div>
+
+            <div class="timeline-item">
+                <strong>September 2026 Onwards</strong>
+                <p><strong>FULL COURSE LAUNCHES.</strong> 9-week cohorts with Week 10 placements. Your residents can now do work experience. Funding secured, programme scaled.</p>
+            </div>
+        </div>
+
+        <!-- Benefits for SH -->
+        <h2>Why Partner With Us?</h2>
+
+        <h3>For Your UC Claimant Residents</h3>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <strong>✓ Free ESOL</strong>
+                <p>No cost to them during pilot or full course.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Job-Focused</strong>
+                <p>English for UC, interviews, workplace communication—not abstract grammar.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Small Groups</strong>
+                <p>Max 12 learners. High speaking time. Personal attention.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Work Experience (Full Course)</strong>
+                <p>Week 10 placement. CV experience. Employment confidence.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Proven Progress</strong>
+                <p>CEFR assessment shows they've improved. Certificate for their CV.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Flexible Timing</strong>
+                <p>Rolling cohorts. Can start Week 1 of next cycle if they miss a session.</p>
+            </div>
+        </div>
+
+        <h3>For Stockport Homes</h3>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <strong>✓ Fills a Gap</strong>
+                <p>You now have a practical ESOL referral pathway specifically designed for UC claimants.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Low-Admin Referrals</strong>
+                <p>Simple process. We handle assessment, teaching, tracking. You just refer and get updates.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Evidence of Impact</strong>
+                <p>CEFR data, learner feedback, placement outcomes. Use for your outcomes reporting.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Work-Experience Option</strong>
+                <p>Post-September, you can offer placements. Assess employment readiness. No cost to you.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Partnership Credibility</strong>
+                <p>Part of a community-focused, evidence-led CIC. Good for your reputation.</p>
+            </div>
+            <div class="benefit-item">
+                <strong>✓ Responsive Support</strong>
+                <p>We're hands-on. Weekly check-ins. Problem-solving. Genuine partnership.</p>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <h2>How the Partnership Works</h2>
+
+        <h3>Step 1: Referral (Pilot Phase)</h3>
+        <p>Your frontline staff (Resident Support Team, Housing Advisors, etc.) identify UC claimants with ESOL needs. They're motivated to work, but language is a barrier. You refer them to us with basic info (name, contact, context).</p>
+
+        <h3>Step 2: Assessment & Placement</h3>
+        <p>They take our online level assessment (10 minutes). We confirm Pre-A1 or A1, send joining details, they start in the next cohort. We send you confirmation they're enrolled.</p>
+
+        <h3>Step 3: Learning (6 weeks)</h3>
+        <p>2 sessions per week, online Teams. We send you monthly updates: attendance, progress, any concerns. At Week 6, they take CEFR reassessment. We share the result with you.</p>
+
+        <h3>Step 4: Feedback (Pilot)</h3>
+        <p>After Week 6, we ask you: "How did your referral get on? Any observations on readiness for work?" We gather this feedback for pilot evaluation and GMCA applications.</p>
+
+        <h3>Step 5: Full Course & Placements (September+)</h3>
+        <p>If your resident wants to continue, they can. 9-week course. Week 10 is voluntary placement. You and us work together to identify suitable roles. They get work experience. You assess their employment readiness.</p>
+
+        <!-- Placement Detail (Post-Sept) -->
+        <h2>Week 10 Placements (Full Course, September+)</h2>
+
+        <p><strong>Why placements matter:</strong> After 9 weeks of learning, your residents need real-world practice. Week 10 placement gives them:</p>
+
+        <ul>
+            <li><strong>Real workplace English:</strong> Speaking to colleagues, taking instructions, problem-solving</li>
+            <li><strong>Employment confidence:</strong> They see they CAN work in an English-speaking environment</li>
+            <li><strong>CV experience:</strong> "Volunteer/Work Experience at [Organisation]" – concrete evidence for future employers</li>
+            <li><strong>Assessment by you:</strong> You see how ready they are for actual employment</li>
+        </ul>
+
+        <p><strong>What placements could look like:</strong></p>
+        <ul>
+            <li>Admin or office support (filing, data entry, phones)</li>
+            <li>Resident support roles (helping other residents)</li>
+            <li>Community-facing work (events, welcome desk)</li>
+            <li>Team-based roles (warehousing, maintenance, with team communication)</li>
+        </ul>
+
+        <p><strong>Time commitment:</strong> 2–3 days per week, 4–6 weeks. Flexible. Afternoons or full days depending on your needs.</p>
+
+        <p><strong>Support:</strong> We prepare them in Week 9. Weekly check-ins with learner and you. Problem-solving if needed. Feedback form at the end.</p>
+
+        <!-- Pilot Get Started -->
+        <h2>Getting Started: The Pilot (This Week)</h2>
+
+        <div class="highlight-box">
+            <p><strong>We're calling partners this week to begin referrals for July pilot cohorts.</strong></p>
+            <p>Next step: 20-minute call to discuss:</p>
+            <ul>
+                <li>How many residents you might refer (ballpark)</li>
+                <li>Your feedback on the pilot model</li>
+                <li>Your interest in placements post-September</li>
+                <li>Any questions or concerns</li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <h2>Let's Talk</h2>
+
+        <div class="contact-box">
+            <p><strong>Ready to discuss the pilot and partnership?</strong></p>
+            <p style="margin-top: 1.5rem; font-size: 1.1rem;">Get in touch with Stockport Language Centre</p>
+
+            <div class="contact-info">
+                <strong>📞 07737 323 009</strong><br>
+                <strong>📧 info@stockportlanguagecentre.org.uk</strong>
+            </div>
+
+            <p style="margin-top: 1.5rem; font-size: 0.95rem;"><em>Best contact: phone call. We'll chat about your residents, your needs, and how we can work together.</em></p>
+        </div>
+
+        <h3 style="text-align: center; margin-top: 2rem;">Or Request More Information</h3>
+        <p style="text-align: center;">Download our materials to share with your team:</p>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="#" class="btn">📄 One-Pager (for staff)</a>
+            <a href="#" class="btn">📄 Full Proposal (for managers)</a>
+        </div>
+
+        <!-- Next Steps -->
+        <h2>What Happens Next</h2>
+
+        <p><strong>If you're interested in the pilot:</strong></p>
+
+        <ol style="margin-left: 2rem;">
+            <li style="margin-bottom: 1rem;"><strong>Call us this week</strong> – 20 minutes to explore partnership</li>
+            <li style="margin-bottom: 1rem;"><strong>Identify potential referrals</strong> – Your UC claimant residents who'd benefit</li>
+            <li style="margin-bottom: 1rem;"><strong>Send us referrals</strong> – Simple form: name, contact, context</li>
+            <li style="margin-bottom: 1rem;"><strong>They complete assessment</strong> – We send them the link, they take the 10-minute test</li>
+            <li style="margin-bottom: 1rem;"><strong>Pilot runs (July–August)</strong> – You get monthly updates, we collect feedback</li>
+            <li style="margin-bottom: 1rem;"><strong>Decide on full course partnership (September+)</strong> – Referrals, placements, scaling</li>
+        </ol>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="index.html" class="btn btn-secondary">Back to Home</a>
+            <a href="partners.html" class="btn btn-secondary">All Partner Opportunities</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stockport Language Centre CIC | CIC Registration: 17044743</p>
+        <p>Data Protection Registration: ZC097595 (Expires: 23 February 2027)</p>
+        <p>45 Middle Hillgate, Stockport, Greater Manchester, SK1 3DG</p>
+    </footer>
+</body>
+</html>

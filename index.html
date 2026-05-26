@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockport Language Centre | ESOL for UC Claimants</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #1B7A8C;
+            --teal-light: #2B9BA8;
+            --green: #6BA545;
+            --orange: #E67E22;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --border: #E0E0E0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: var(--white);
+            padding: 4px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            border-bottom-color: var(--orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #d65a0f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--teal);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 3rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        /* Section Headings */
+        h2 {
+            font-size: 2.2rem;
+            color: var(--teal);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--orange);
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: var(--teal);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Cards Grid */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--teal);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--teal);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Feature Section */
+        .features {
+            background: var(--bg-light);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-radius: 8px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--orange);
+        }
+
+        .feature strong {
+            color: var(--teal);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 4rem 0;
+            border-radius: 8px;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            border: none;
+            padding: 0;
+        }
+
+        .cta-section h2::after {
+            background: var(--orange);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--bg-light);
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .contact-info {
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-info strong {
+            color: var(--teal);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--teal);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                gap: 1rem;
+            }
+
+            nav {
+                gap: 1rem;
+                flex-basis: 100%;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .stats {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="Stock_Lan_LOGO_2.JPG" alt="Stockport Language Centre Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Stockport Language Centre</h1>
+                    <p>Practical English for Real Life</p>
+                </div>
+            </div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="programme.html">Programme</a>
+                <a href="about.html">About</a>
+                <a href="partners.html">Partners</a>
+                <a href="sh-partnership.html">Stockport Homes</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Free ESOL for Universal Credit Claimants</h1>
+            <p class="tagline">Learn English aligned to your UC journey and job search—with workplace experience built in</p>
+            <div class="hero-buttons">
+                <a href="programme.html" class="btn btn-primary">Learn About Our Pilot</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Programme Overview -->
+        <section style="padding: 3rem 0;">
+            <h2>Our ESOL Pilot Programme</h2>
+            <p style="text-align: center; font-size: 1.05rem; color: var(--text-light); margin-bottom: 2rem;">
+                <strong>Now Recruiting:</strong> 6-week ESOL cohorts (Pre-A1 and A1, separate) starting <strong>1st Monday in July 2026</strong>
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>What You'll Learn</h3>
+                    <p><strong>English for UC & Work:</strong> Claiming benefits, attending appointments, job interviews, workplace communication, digital skills—all in real context.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>How It Works</h3>
+                    <p><strong>Online via Teams:</strong> 2 × 90-min sessions/week + homework. Two levels: Pre-A1 (beginner) and A1 (early intermediate). Aligned to CEFR framework.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💼</div>
+                    <h3>Work Experience Included</h3>
+                    <p><strong>Week 6 → Work Placement:</strong> Finish your course with real workplace experience through our partner organisations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="features">
+            <h2>Why Stockport Language Centre?</h2>
+
+            <div class="feature-grid">
+                <div class="feature">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</div>
+                    <strong>Real-World English</strong>
+                    <p>We teach English in the context of UC, job interviews, workplace communication—not abstract grammar.</p>
+                </div>
+
+                <div class="feature">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</div>
+                    <strong>Everybody Speaks</strong>
+                    <p>High speaking time. Small groups. Flexible pacing. We make sure every learner gets practice and confidence.</p>
+                </div>
+
+                <div class="feature">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</div>
+                    <strong>Employment-Focused</strong>
+                    <p>We align everything to the UC journey and job readiness. Week 6 includes work-experience placement.</p>
+                </div>
+
+                <div class="feature">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</div>
+                    <strong>Partnership-Built</strong>
+                    <p>We work with frontline organisations to make referrals and placements seamless.</p>
+                </div>
+
+                <div class="feature">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</div>
+                    <strong>Evidence-Led</strong>
+                    <p>We measure progress using CEFR, learner feedback, and employment outcomes.</p>
+                </div>
+
+                <div class="feature">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</div>
+                    <strong>Inclusive & Accessible</strong>
+                    <p>Free during pilot. Online delivery. Flexible cohort sizes. We remove barriers to access.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Apply?</h2>
+            <p style="font-size: 1.2rem; margin: 1.5rem 0;">Assessment opens early June. Complete our 10-minute level test to find out if Pre-A1 or A1 is right for you.</p>
+            <a href="programme.html" class="btn btn-primary" style="background: var(--orange);">View the Programme & Assessment</a>
+        </section>
+
+        <!-- About Section Preview -->
+        <section style="padding: 3rem 0; text-align: center;">
+            <h2>About Kenneth & Our Mission</h2>
+            <p style="font-size: 1.05rem; color: var(--text-light); max-width: 700px; margin: 1rem auto 2rem;">
+                Stockport Language Centre was founded by Kenneth Moore, a UC Work Coach with 30+ years of IT experience and 13 years in Data Protection and professional training. 
+                We saw a gap in ESOL provision—and we built something practical, work-focused, and real.
+            </p>
+            <a href="about.html" class="btn btn-primary">Learn More About Us</a>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <h2>Get in Touch</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Questions about the programme? We're here to help.</p>
+
+            <div class="contact-info">
+                <strong>Kenneth Moore</strong><br>
+                Founder & Lead Teacher<br>
+                Stockport Language Centre CIC
+            </div>
+
+            <div class="contact-info">
+                <strong>📞 07737 323 009</strong>
+            </div>
+
+            <div class="contact-info">
+                <strong>📧 Kenneth.Moore@stockportlanguagecentre.org.uk</strong>
+            </div>
+
+            <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.9;">
+                <em>Preferred contact: phone call (we'll chat about your English level and goals)</em>
+            </p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="/">Home</a>
+                    <a href="programme.html">ESOL Programme</a>
+                    <a href="about.html">About Us</a>
+                    <a href="partners.html">Partner With Us</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <a href="tel:07737323009">📞 07737 323 009</a>
+                    <a href="mailto:Kenneth.Moore@stockportlanguagecentre.org.uk">📧 Email</a>
+                    <p>45 Middle Hillgate<br>Stockport, Greater Manchester<br>SK1 3DG</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Our Details</h4>
+                    <p><strong>CIC Registration:</strong> 17044743</p>
+                    <p><strong>Data Protection Reg:</strong> ZC097595</p>
+                    <p><strong>Expires:</strong> 23 February 2027</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Stockport Language Centre CIC | Community Interest Company</p>
+                <p>Registered at: 45 Middle Hillgate, Stockport, Greater Manchester, SK1 3DG</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

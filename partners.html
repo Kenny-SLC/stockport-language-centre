@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner With Us – Stockport Language Centre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #1B7A8C;
+            --teal-light: #2B9BA8;
+            --green: #6BA545;
+            --orange: #E67E22;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --border: #E0E0E0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: var(--white);
+            padding: 4px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            border-bottom-color: var(--orange);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--orange);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--teal);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--orange);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--teal);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 3px solid var(--orange);
+        }
+
+        .intro-box h2 {
+            color: var(--white);
+            border: none;
+            padding: 0;
+            margin-top: 0;
+        }
+
+        .intro-box p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .highlight-box {
+            background: #e8f4f8;
+            border-left: 4px solid var(--orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+        }
+
+        .highlight-box strong {
+            color: var(--teal);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--teal);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--teal);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .process {
+            margin: 2rem 0;
+        }
+
+        .process-step {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 6px;
+            border-left: 4px solid var(--orange);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .process-step strong {
+            color: var(--teal);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.7rem;
+            line-height: 1.7;
+        }
+
+        .contact-box {
+            background: #fff3cd;
+            border: 2px solid var(--orange);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .contact-box strong {
+            color: #856404;
+        }
+
+        .contact-box p {
+            margin: 1rem 0;
+        }
+
+        .contact-info {
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+
+        .btn {
+            background: var(--orange);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #d65a0f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--teal);
+        }
+
+        .btn-secondary:hover {
+            background: #165a6a;
+        }
+
+        footer {
+            background: var(--teal);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                gap: 1rem;
+                flex-basis: 100%;
+                justify-content: center;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="Stock_Lan_LOGO_2.JPG" alt="Stockport Language Centre Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Stockport Language Centre</h1>
+                    <p>Practical English for Real Life</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="programme.html">Programme</a>
+                <a href="about.html">About</a>
+                <a href="partners.html">Partners</a>
+                <a href="sh-partnership.html">Stockport Homes</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Partner With Us</h1>
+
+        <div class="intro-box">
+            <h2>Are you a Jobcentre, Citizens Advice, Stockport Homes, or community organisation?</h2>
+            <p>We're building partnerships to refer UC claimants with ESOL needs to our free pilot programme and provide work-experience placements.</p>
+            <p><strong>Let's close a gap together.</strong></p>
+        </div>
+
+        <!-- The Problem -->
+        <h2>The Problem We're Solving</h2>
+
+        <p>You work with UC claimants every day. You see them struggling with:</p>
+
+        <ul>
+            <li>English language barriers to job search and interviews</li>
+            <li>Difficulty completing job applications, CVs, and forms</li>
+            <li>No local, work-focused ESOL courses that fit their UC journey</li>
+            <li>Lack of work experience to build employment confidence</li>
+        </ul>
+
+        <p>You refer them to generic ESOL courses, but they don't always stick—because the connection to their job search feels distant.</p>
+
+        <div class="highlight-box">
+            <strong>We've built something different:</strong> 6-week ESOL aligned to UC, job-readiness, and real workplace placement. Free. Practical. Results-focused.
+        </div>
+
+        <!-- What We Offer Partners -->
+        <h2>What Partnership Looks Like</h2>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <h3>Learner Referrals</h3>
+                <p>You identify UC claimants with ESOL needs and refer them to our programme. We handle assessment, teaching, and progress tracking.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💼</div>
+                <h3>Work-Experience Placements</h3>
+                <p>You provide volunteer or work-experience placements for learners in Week 6+. They practise real workplace English while you assess their employment readiness.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Feedback & Outcomes</h3>
+                <p>You get regular updates on your referrals' progress, CEFR improvements, and placement outcomes—evidence of impact.</p>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <h2>How the Partnership Works</h2>
+
+        <div class="process">
+            <div class="process-step">
+                <strong>1. You Refer a Learner</strong>
+                <p>A UC claimant in your service has ESOL needs and wants to improve their English for work. You complete a simple referral form (name, contact, brief context) and send it to Kenneth.</p>
+            </div>
+
+            <div class="process-step">
+                <strong>2. We Assess & Place</strong>
+                <p>They take our online level assessment. We confirm they're Pre-A1 or A1, send them joining details for Teams, and they start in the next cohort.</p>
+            </div>
+
+            <div class="process-step">
+                <strong>3. They Learn & Build Confidence</strong>
+                <p>6 weeks of online classes (2 × 90 min/week). We email you with attendance and progress updates. At Week 6, they take a CEFR reassessment (we share the result).</p>
+            </div>
+
+            <div class="process-step">
+                <strong>4. You Provide a Placement</strong>
+                <p>In Week 6, we discuss placement options with you. You offer a volunteer or work-experience role (2–3 days/week). Kenneth supports them and you assess their readiness.</p>
+            </div>
+
+            <div class="process-step">
+                <strong>5. Placement & Beyond</strong>
+                <p>They move into your placement (Weeks 7+). You see their workplace English in action. Kenneth stays available for troubleshooting. You provide feedback at the end.</p>
+            </div>
+        </div>
+
+        <!-- Benefits for Your Organisation -->
+        <h2>Why Partner With Us?</h2>
+
+        <div class="two-column">
+            <div>
+                <h3>For Your Referrals</h3>
+                <ul>
+                    <li><strong>Free course</strong> – no cost to the claimant</li>
+                    <li><strong>Job-focused</strong> – aligned to their UC journey</li>
+                    <li><strong>Small groups</strong> – personal attention and high speaking time</li>
+                    <li><strong>Placement included</strong> – they finish with work experience</li>
+                    <li><strong>Certificate</strong> – proof of progress for their CV</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>For Your Organisation</h3>
+                <ul>
+                    <li><strong>Fills a gap</strong> – you now have a practical ESOL referral pathway</li>
+                    <li><strong>Evidence of outcomes</strong> – you see CEFR improvement, learner feedback, placement results</li>
+                    <li><strong>Work experience provision</strong> – low-admin placements that assess employment readiness</li>
+                    <li><strong>Partnership credibility</strong> – you're part of a community-focused initiative</li>
+                    <li><strong>Support</strong> – Kenneth is responsive and hands-on</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Placement Details -->
+        <h2>About Work-Experience Placements</h2>
+
+        <h3>What kinds of placements work?</h3>
+        <p>Any role where learners will speak English and build workplace confidence:</p>
+        <ul>
+            <li><strong>Admin or office support</strong> – filing, data entry, phone calls</li>
+            <li><strong>Customer-facing roles</strong> – resident support, reception, community work</li>
+            <li><strong>Team-based roles</strong> – warehouse, maintenance support, cleaning (with team communication)</li>
+            <li><strong>Volunteer roles</strong> – community events, support groups, mentoring</li>
+        </ul>
+
+        <h3>How much time commitment?</h3>
+        <p><strong>2–3 days per week for 4–6 weeks.</strong> Flexible, based on learner and organisation needs. Can be afternoons or full days.</p>
+
+        <h3>What support do we provide?</h3>
+        <ul>
+            <li><strong>Pre-placement prep:</strong> We prepare learners in Week 6 (what to expect, key phrases, questions to ask)</li>
+            <li><strong>Weekly check-ins:</strong> Kenneth calls or emails the learner and you each week to see how it's going</li>
+            <li><strong>Problem-solving:</strong> If something isn't working, we troubleshoot together</li>
+            <li><strong>Feedback:</strong> You complete a simple feedback form at the end (how ready for employment are they?)</li>
+        </ul>
+
+        <!-- Target Partners -->
+        <h2>Our Target Partners</h2>
+
+        <p>We're prioritising partnerships with organisations that have direct contact with UC claimants:</p>
+
+        <ul>
+            <li><strong>Jobcentre Plus Stockport</strong> – referrals from work coaches</li>
+            <li><strong>Citizens Advice Stockport</strong> – claimants seeking support</li>
+            <li><strong>Stockport Homes</strong> – resident support, placements</li>
+            <li><strong>Refugee & asylum support</strong> – Stockport Signpost, Refugee Action GM</li>
+            <li><strong>Children's Centres & Family Hubs</strong> – parents returning to work</li>
+            <li><strong>Mosques & community centres</strong> – community reach</li>
+        </ul>
+
+        <p>But <strong>we're open to partnerships with any organisation aligned to supporting UC claimants or ESOL learners.</strong></p>
+
+        <!-- Getting Started -->
+        <h2>Getting Started</h2>
+
+        <div class="highlight-box">
+            <strong>Next step:</strong> Get in touch with Kenneth. We'll discuss your needs, how referrals work, and what placements might look like. No commitment needed—just a conversation.
+        </div>
+
+        <h3>What You'll Need from Us</h3>
+        <ul>
+            <li><strong>One-pager</strong> (to share with your frontline staff) – explains what we do, how to refer</li>
+            <li><strong>Referral form</strong> (simple: name, contact, UC status, ESOL needs)</li>
+            <li><strong>Ongoing communication</strong> – we keep you updated on referrals and placements</li>
+        </ul>
+
+        <h3>What We Need from You</h3>
+        <ul>
+            <li><strong>Referrals</strong> – UC claimants aged 18+ with ESOL needs and motivation to work</li>
+            <li><strong>Placements</strong> (optional, but valuable) – 2–3 days/week for 4–6 weeks, supervised by your team</li>
+            <li><strong>Feedback</strong> – brief update on placement and learner readiness at the end</li>
+        </ul>
+
+        <!-- Contact -->
+        <h2>Let's Talk</h2>
+
+        <div class="contact-box">
+            <h3>Interested in partnering?</h3>
+            <p style="margin: 1.5rem 0; font-size: 1.05rem;">Get in touch with Kenneth to discuss your organisation's needs and how we can work together.</p>
+
+            <div class="contact-info">
+                <strong>Kenneth Moore</strong><br>
+                Founder & Lead Teacher<br>
+                Stockport Language Centre CIC
+            </div>
+
+            <div class="contact-info">
+                <strong>📞</strong> <span style="font-size: 1.1rem;">07737 323 009</span>
+            </div>
+
+            <div class="contact-info">
+                <strong>📧</strong> <span style="font-size: 1.1rem;">Kenneth.Moore@stockportlanguagecentre.org.uk</span>
+            </div>
+
+            <p style="margin-top: 1.5rem; font-size: 0.95rem;"><em>Preferred: phone call (20 minutes to explore partnership options)</em></p>
+        </div>
+
+        <!-- Downloads for partners -->
+        <h2>Download Materials for Your Team</h2>
+
+        <p>Share these with your frontline staff:</p>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="#" class="btn">📄 One-Pager (for staff)</a>
+            <a href="#" class="btn">📄 Full Proposal (for managers)</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="index.html" class="btn btn-secondary">Back to Home</a>
+            <a href="programme.html" class="btn btn-secondary">View the Programme</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stockport Language Centre CIC | CIC Registration: 17044743</p>
+        <p>Data Protection Registration: ZC097595 (Expires: 23 February 2027)</p>
+        <p>45 Middle Hillgate, Stockport, Greater Manchester, SK1 3DG</p>
+    </footer>
+</body>
+</html>

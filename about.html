@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us – Stockport Language Centre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #1B7A8C;
+            --teal-light: #2B9BA8;
+            --green: #6BA545;
+            --orange: #E67E22;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --border: #E0E0E0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: var(--white);
+            padding: 4px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            border-bottom-color: var(--orange);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--orange);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--teal);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--orange);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--teal);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8f6 100%);
+            border-left: 4px solid var(--orange);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+        }
+
+        .intro-box strong {
+            color: var(--teal);
+        }
+
+        .profile-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--teal);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .profile-card strong {
+            color: var(--teal);
+            font-size: 1.1rem;
+        }
+
+        .credentials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .credential {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--orange);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .credential strong {
+            color: var(--teal);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .value-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            border-top: 4px solid var(--teal);
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            color: var(--teal);
+            margin-top: 0;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.7rem;
+            line-height: 1.7;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            font-size: 1.1em;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.8;
+            border: 3px solid var(--orange);
+        }
+
+        .contact-box {
+            background: #fff3cd;
+            border: 2px solid var(--orange);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .contact-box strong {
+            color: #856404;
+        }
+
+        .contact-box p {
+            margin: 1rem 0;
+        }
+
+        .btn {
+            background: var(--orange);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 1rem 0.5rem 1rem 0;
+        }
+
+        .btn:hover {
+            background: #d65a0f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--teal);
+        }
+
+        .btn-secondary:hover {
+            background: #165a6a;
+        }
+
+        footer {
+            background: var(--teal);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                gap: 1rem;
+                flex-basis: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="Stock_Lan_LOGO_2.JPG" alt="Stockport Language Centre Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Stockport Language Centre</h1>
+                    <p>Practical English for Real Life</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="programme.html">Programme</a>
+                <a href="about.html">About</a>
+                <a href="partners.html">Partners</a>
+                <a href="sh-partnership.html">Stockport Homes</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>About Stockport Language Centre</h1>
+
+        <div class="intro-box">
+            <p><strong>Stockport Language Centre CIC</strong> is a community interest company dedicated to making ESOL education accessible, practical, and aligned to the real needs of Universal Credit claimants in Greater Manchester.</p>
+        </div>
+
+        <!-- Kenneth Section -->
+        <h2>Meet Kenneth Moore, Founder & Lead Teacher</h2>
+
+        <div class="profile-card">
+            <p>Kenneth brings <strong>30+ years of IT experience</strong> and a deep understanding of how compliance, training, and language work together to help people succeed.</p>
+
+            <p>For <strong>13 years at Fujitsu</strong>, Kenneth worked in Data Protection and professional awareness training, designing courses that made complex topics accessible to real people. He knows how to explain things clearly—and how to make learning stick.</p>
+
+            <p>As a <strong>UC Work Coach at DWP</strong>, Kenneth sees firsthand what jobseekers need: not just English lessons, but English *in context* of UC, job interviews, and workplace communication. He understands the UC journey from the inside.</p>
+
+            <p>He founded Stockport Language Centre CIC to bridge a gap: <strong>quality ESOL teaching aligned to actual employment outcomes</strong>—delivered with respect for learners' time and real-world constraints.</p>
+        </div>
+
+        <h3>Kenneth's Credentials</h3>
+        <div class="credentials">
+            <div class="credential">
+                <strong>30+ years IT experience</strong>
+                <p>Systems, compliance, training design, digital transformation</p>
+            </div>
+            <div class="credential">
+                <strong>13 years at Fujitsu</strong>
+                <p>Data Protection, professional awareness, training delivery</p>
+            </div>
+            <div class="credential">
+                <strong>UC Work Coach (DWP)</strong>
+                <p>Current, active experience supporting job-seekers through UC journey</p>
+            </div>
+            <div class="credential">
+                <strong>ESOL Educator</strong>
+                <p>Task-based, communicative methodology; CEFR-aligned curriculum design</p>
+            </div>
+        </div>
+
+        <!-- Why We Started -->
+        <h2>Why We Started This</h2>
+
+        <p>Kenneth saw a pattern in his work at the Job Centre:</p>
+
+        <ul>
+            <li><strong>UC claimants with ESOL needs</strong> often have no straightforward path to local English courses aligned to their job search</li>
+            <li><strong>Existing ESOL provision</strong> is often generic, classroom-based, and disconnected from the real language UC claimants need (appointments, forms, interviews, workplace communication)</li>
+            <li><strong>Work coaches and support workers</strong> have no easy way to refer claimants to quality ESOL that fits into their UC journey</li>
+            <li><strong>Learners drop out</strong> when they don't see direct relevance to employment</li>
+        </ul>
+
+        <div class="quote-box">
+            "I wanted to create something different: ESOL that's practical, relevant, and designed around how people actually learn best—high speaking time, real tasks, and a pathway to work."
+        </div>
+
+        <!-- Our Values -->
+        <h2>Our Approach</h2>
+
+        <div class="values">
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <h3>Real-World English</h3>
+                <p>We teach English in the context of UC, job interviews, workplace communication—not abstract grammar.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">👥</div>
+                <h3>Everybody Speaks</h3>
+                <p>High speaking time. Small groups. Flexible pacing. We make sure every learner gets practice and confidence.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">💼</div>
+                <h3>Employment-Focused</h3>
+                <p>We align everything to the UC journey and job readiness. Week 6 includes work-experience placement.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3>Partnership-Built</h3>
+                <p>We work with frontline organisations—Jobcentre Plus, Citizens Advice, Stockport Homes, refugee support—to make referrals and placements seamless.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">📊</div>
+                <h3>Evidence-Led</h3>
+                <p>We measure progress using CEFR, learner feedback, and employment outcomes. We're transparent about what works.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h3>Inclusive & Accessible</h3>
+                <p>Free during pilot. Online delivery. Flexible cohort sizes. We remove barriers to access.</p>
+            </div>
+        </div>
+
+        <!-- CIC Status -->
+        <h2>Community Interest Company</h2>
+
+        <p>Stockport Language Centre is a <strong>Community Interest Company (CIC)</strong>. This means:</p>
+
+        <ul>
+            <li><strong>Not for profit:</strong> Any surplus is reinvested into the programme or used to keep costs low for learners</li>
+            <li><strong>Community-focused:</strong> Our mission is to support ESOL learners in Stockport and Greater Manchester, not to maximize profit</li>
+            <li><strong>Transparent & accountable:</strong> We report on our activities, outcomes, and finances to the Community Interest Company Regulator</li>
+            <li><strong>Sustainable:</strong> We're building partnerships and seeking funding (GMCA grants, charities, Jobcentre Flexible Support Fund) to scale sustainably</li>
+        </ul>
+
+        <!-- Contact -->
+        <h2>Get in Touch</h2>
+
+        <div class="contact-box">
+            <p><strong>Questions about our approach or philosophy?</strong></p>
+            <p style="margin-top: 1.5rem;">
+                <strong>Kenneth Moore</strong><br>
+                07737 323 009<br>
+                Kenneth.Moore@stockportlanguagecentre.org.uk
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.95em;"><em>Kenneth is happy to chat about the programme, our approach, or partnership opportunities.</em></p>
+        </div>
+
+        <div style="text-align: center; margin: 3rem 0;">
+            <a href="index.html" class="btn btn-secondary">Back to Home</a>
+            <a href="programme.html" class="btn">View the Programme</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stockport Language Centre CIC | CIC Registration: 17044743</p>
+        <p>Data Protection Registration: ZC097595 (Expires: 23 February 2027)</p>
+        <p>45 Middle Hillgate, Stockport, Greater Manchester, SK1 3DG</p>
+    </footer>
+</body>
+</html>

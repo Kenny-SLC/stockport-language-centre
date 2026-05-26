@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESOL Pilot Programme – Stockport Language Centre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #1B7A8C;
+            --teal-light: #2B9BA8;
+            --green: #6BA545;
+            --orange: #E67E22;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --border: #E0E0E0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: var(--white);
+            padding: 4px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            border-bottom-color: var(--orange);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--orange);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--teal);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--orange);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--teal);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 2rem 0;
+            border: 3px solid var(--orange);
+        }
+
+        .banner h2 {
+            color: var(--white);
+            border: none;
+            padding: 0;
+            margin-top: 0;
+        }
+
+        .banner p {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--teal);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--teal);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: #e8f4f8;
+            border-left: 4px solid var(--orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+        }
+
+        .highlight-box strong {
+            color: var(--teal);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--teal);
+            border-radius: 50%;
+            border: 3px solid var(--orange);
+        }
+
+        .timeline-item strong {
+            color: var(--teal);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.7rem;
+            line-height: 1.7;
+        }
+
+        .faq-item {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--orange);
+        }
+
+        .faq-item h4 {
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-box {
+            background: #fff3cd;
+            border: 2px solid var(--orange);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .contact-box strong {
+            color: #856404;
+        }
+
+        .contact-box p {
+            margin: 1rem 0;
+        }
+
+        .btn {
+            background: var(--orange);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #d65a0f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--teal);
+        }
+
+        .btn-secondary:hover {
+            background: #165a6a;
+        }
+
+        .assessment-placeholder {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 2rem 0;
+            border: 2px dashed var(--teal);
+        }
+
+        .assessment-placeholder h3 {
+            margin-top: 0;
+        }
+
+        footer {
+            background: var(--teal);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                gap: 1rem;
+                flex-basis: 100%;
+                justify-content: center;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="Stock_Lan_LOGO_2.JPG" alt="Stockport Language Centre Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Stockport Language Centre</h1>
+                    <p>Practical English for Real Life</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="programme.html">Programme</a>
+                <a href="about.html">About</a>
+                <a href="partners.html">Partners</a>
+                <a href="sh-partnership.html">Stockport Homes</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>ESOL Pilot Programme</h1>
+
+        <div class="banner">
+            <h2>Free 6-Week Intensive English Course</h2>
+            <p>For Universal Credit claimants in Stockport<br><strong>Starts: 1st Monday in July 2026</strong></p>
+            <a href="#apply" class="btn">Learn How to Apply</a>
+        </div>
+
+        <!-- What is it? -->
+        <h2>What is the ESOL Pilot?</h2>
+
+        <p>A <strong>free, 6-week intensive English course</strong> designed specifically for Universal Credit claimants. We teach English in the context of your UC journey, job search, and workplace communication—not classroom grammar.</p>
+
+        <p>You study <strong>online via Teams</strong> with a small group (max 12 learners), so you get plenty of speaking practice and personal support.</p>
+
+        <div class="highlight-box">
+            <strong>Key benefit:</strong> Week 6 leads into a work-experience placement, so you finish the course with real workplace language practice and something concrete for your CV.
+        </div>
+
+        <!-- Who is it for? -->
+        <h2>Who is it for?</h2>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">✅</div>
+                <h3>UC Claimants</h3>
+                <p>You're claiming Universal Credit in Stockport or Greater Manchester</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">✅</div>
+                <h3>English Language Learners</h3>
+                <p>Your first language is not English, and you're at Pre-A1 or A1 level</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">✅</div>
+                <h3>Job-Ready</h3>
+                <p>You want to work on your English to improve job prospects and workplace confidence</p>
+            </div>
+        </div>
+
+        <p><strong>You don't need formal education experience.</strong> We meet you where you are and build your confidence from day one.</p>
+
+        <!-- What you'll learn -->
+        <h2>What You'll Learn</h2>
+
+        <div class="two-column">
+            <div>
+                <h3>🎯 English for UC & Appointments</h3>
+                <ul>
+                    <li>Claiming benefits and understanding your rights</li>
+                    <li>Attending Job Centre appointments with confidence</li>
+                    <li>Filling forms (UC, job applications, etc.)</li>
+                    <li>Phone calls and email communication</li>
+                </ul>
+            </div>
+            <div>
+                <h3>💼 English for Work & Interviews</h3>
+                <ul>
+                    <li>Job interview language and confidence</li>
+                    <li>CV writing and application letters</li>
+                    <li>Workplace communication and instructions</li>
+                    <li>Teamwork, questions, and asking for help</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>💻 Digital Skills Built In</h3>
+        <p>Alongside English, you'll build confidence using Teams, email, job websites, online forms, and other digital tools you need in modern workplaces.</p>
+
+        <!-- How it works -->
+        <h2>How It Works</h2>
+
+        <h3>📅 Schedule</h3>
+        <ul>
+            <li><strong>Dates:</strong> Starts 1st Monday in July 2026 (6 weeks)</li>
+            <li><strong>Classes:</strong> 2 sessions per week, 90 minutes each (online via Teams)</li>
+            <li><strong>Homework:</strong> ~45 minutes per week (optional but recommended)</li>
+            <li><strong>Two levels:</strong> Pre-A1 (beginner) and A1 (early intermediate)</li>
+            <li><strong>Max group size:</strong> 12 learners (so you get personal attention)</li>
+        </ul>
+
+        <h3>🎓 Week-by-Week Breakdown</h3>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Weeks 1–3: Foundation</strong>
+                <p>Greetings, personal information, basic UC vocabulary, numbers, dates, essential phrases. Building confidence and speaking time.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Weeks 4–5: UC & Job Readiness</strong>
+                <p>Filling forms, phone calls to Job Centre, interview language, job applications, workplace communication. Real-world practice.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Week 6: Consolidation & Placement Planning</strong>
+                <p>CEFR assessment (see your progress!), learner feedback, transition planning for work-experience placement (starts Week 7).</p>
+            </div>
+        </div>
+
+        <!-- Work-Experience Placement -->
+        <h2>💼 Work-Experience Placement (Weeks 6+)</h2>
+
+        <p>This is what makes our programme different. In Week 6, we work with our partners (like Stockport Homes) to find you a volunteer or work-experience placement suited to your level and interests.</p>
+
+        <div class="highlight-box">
+            <strong>What this might look like:</strong> Admin support, customer service, resident support, community work, or any role where you'll practise real workplace English. You're speaking, learning on the job, and building your CV.
+        </div>
+
+        <ul>
+            <li>Placement is <strong>voluntary work</strong> (unpaid, but great CV experience)</li>
+            <li>We prepare you in Week 6 so you feel confident</li>
+            <li>Kenneth stays involved to support you</li>
+            <li>Typically <strong>2–3 days per week</strong> for a few weeks</li>
+        </ul>
+
+        <!-- Assessment & Progress -->
+        <h2>How We Measure Progress</h2>
+
+        <h3>When You Start</h3>
+        <ul>
+            <li>Take our <strong>online level assessment</strong> (10 minutes, no pass/fail)</li>
+            <li>We assess your English using the <strong>CEFR framework</strong> (Pre-A1 → A1 → etc.)</li>
+        </ul>
+
+        <h3>When You Finish (Week 6)</h3>
+        <ul>
+            <li><strong>CEFR reassessment</strong> – see your progress!</li>
+            <li><strong>Learner feedback</strong> – we want to know what worked and what didn't</li>
+            <li><strong>Certificate of completion</strong> – something concrete for your CV</li>
+            <li><strong>Transition to placement</strong> – we support you moving into work experience</li>
+        </ul>
+
+        <!-- Apply -->
+        <h2 id="apply">How to Apply</h2>
+
+        <div class="assessment-placeholder">
+            <h3>Step 1: Take the Level Assessment</h3>
+            <p style="margin: 1rem 0;">Complete our quick online assessment to find out if Pre-A1 or A1 is right for you.</p>
+            <p style="font-size: 0.95rem; color: var(--text-light); margin-bottom: 1.5rem;"><em>Assessment opens early June 2026</em></p>
+
+            <p style="margin: 1.5rem 0;"><strong>In the meantime:</strong> Get in touch with any questions!</p>
+            <div style="margin: 1.5rem 0;">
+                <strong>Kenneth Moore</strong><br>
+                07737 323 009<br>
+                Kenneth.Moore@stockportlanguagecentre.org.uk
+            </div>
+        </div>
+
+        <h3>Step 2: We Contact You</h3>
+        <p>Within 48 hours, we'll email or call you with your result and next steps—which cohort, start dates, how to join Teams, etc.</p>
+
+        <h3>Step 3: Join Your Cohort</h3>
+        <p>You'll receive login details for Teams and any prep materials. We'll do a quick check-in before Week 1 to make sure you're ready.</p>
+
+        <!-- FAQs -->
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <h4>Is it really free?</h4>
+            <p><strong>Yes.</strong> During the pilot phase (first two cohorts), the programme is completely free. We're gathering evidence to apply for ongoing funding.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>What if I'm not confident using Teams?</h4>
+            <p>That's OK! We'll do a practice session before Week 1 to make sure you're comfortable. Teams is straightforward, and we'll teach you.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>What if I have other commitments during the 6 weeks?</h4>
+            <p>Let us know. The cohorts are designed to be flexible. If you miss a session, we'll share the recording and homework separately. But attendance is important for group learning and speaking practice.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>What if my English is lower than Pre-A1?</h4>
+            <p>Our Pre-A1 cohort is designed for absolute beginners. But get in touch with Kenneth—we can discuss whether the timing is right or if you'd benefit from some preparation.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>What happens after the 6 weeks if I want to continue?</h4>
+            <p>Great! We're planning to run ongoing cohorts and apply for funding post-pilot. We'll keep you updated on next steps and further learning options.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Will I get a certificate?</h4>
+            <p><strong>Yes.</strong> You'll receive a certificate of completion plus your CEFR assessment result—something concrete for your CV and job applications.</p>
+        </div>
+
+        <!-- Contact -->
+        <h2>Questions?</h2>
+
+        <div class="contact-box">
+            <p style="font-size: 1.05rem; margin: 0;"><strong>Get in touch anytime</strong></p>
+            <div style="margin: 1.5rem 0;">
+                <strong>Kenneth Moore</strong><br>
+                Founder & Lead Teacher<br>
+                Stockport Language Centre CIC
+            </div>
+            <div style="margin: 1.5rem 0;">
+                <strong>📞</strong> <span style="font-size: 1.1rem;">07737 323 009</span>
+            </div>
+            <div style="margin: 1.5rem 0;">
+                <strong>📧</strong> <span style="font-size: 1.1rem;">Kenneth.Moore@stockportlanguagecentre.org.uk</span>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.95rem;"><em>Preferred contact: phone. Kenneth is happy to chat about your goals, English level, and how the programme works for you.</em></p>
+        </div>
+
+        <!-- Downloads -->
+        <h2>Learn More</h2>
+        <p>Download more details about the programme:</p>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="#" class="btn">📄 One-Pager</a>
+            <a href="#" class="btn">📄 Course Overview</a>
+            <a href="#" class="btn">📄 Full Proposal</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="index.html" class="btn btn-secondary">Back to Home</a>
+            <a href="about.html" class="btn btn-secondary">About Kenneth & Us</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stockport Language Centre CIC | CIC Registration: 17044743</p>
+        <p>Data Protection Registration: ZC097595 (Expires: 23 February 2027)</p>
+        <p>45 Middle Hillgate, Stockport, Greater Manchester, SK1 3DG</p>
+    </footer>
+</body>
+</html>
